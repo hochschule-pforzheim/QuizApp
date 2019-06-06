@@ -55,7 +55,8 @@ Core::setTaskMap(array(
     'play'=>'',
     'play2'=>'',
     'spielende'=>'',
-    'archivdetail'=>''
+    'archivdetail'=>'',
+    'fragenersteller'=>'controller.createquestion.php'
    ));
 
 
