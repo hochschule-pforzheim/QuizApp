@@ -1,4 +1,0 @@
-SELECT DISTINCT ?propertyType WHERE {
-  ?property a wikibase:Property .
-  ?property wikibase:propertyType ?propertyType .
-}
