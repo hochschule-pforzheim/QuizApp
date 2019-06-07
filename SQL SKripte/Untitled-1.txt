@@ -1,0 +1,25 @@
+SELECT DISTINCT ?country ?countryLabel ?capital ?capitalLabel ?countrypopulation ?language ?languageLabel ?currency $currencyLabel ?highestpoint ?highestpointLabel ?lowestpoint ?lowestpointLabel ?headofgoverment ?headofgovermentLabel ?formofgoverment ?formofgovermentLabel ?HDI ?scoollesschild ?unemployment
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078 .
+  #not a former country
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q3024240}
+  #and no an ancient civilisation (needed to exclude ancient Egypt)
+  FILTER NOT EXISTS {?country wdt:P31 wd:Q28171280}
+?country wdt:P36 ?capital;
+wdt:P1082 ?countrypopulation ;
+#wdt:P37 ?language ;
+wdt:P38 ?currency;
+wdt:P610 ?highestpoint;
+wdt:P1589 ?lowestpoint;
+wdt:P6 ?headofgoverment;
+#wdt:P122 ?formofgoverment;
+#wdt:P1081 ?HDI;
+wdt:P2573 ?scoollesschild;         
+#wdt:P1198 ?unemployment.
+  
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "de"}
+}
+ 
+ORDER BY ?countryLabel
+LIMIT 500
