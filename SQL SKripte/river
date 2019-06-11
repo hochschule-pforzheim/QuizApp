@@ -1,0 +1,13 @@
+#rivers
+SELECT ?river ?riverLabel ?origin ?mouth ?length ?lengthLabel ?drainage  {
+  ?river wdt:P31 wd:Q4022 .
+  ?river wdt:885 ?origin;
+          wdt:P403 ?mouth;
+          wdt:P2043 ?length; 
+          wdt:P4614 ?drainage;
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en" .
+
+  }
+} ORDER BY ?river 
+Limit 100
