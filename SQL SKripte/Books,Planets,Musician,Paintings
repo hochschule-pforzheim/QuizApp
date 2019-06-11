@@ -1,0 +1,66 @@
+# Bücher
+
+SELECT ?book ?bookLabel ?authorLabel ?genre_label ?series_label ?publicationDate
+WHERE
+{
+	# ?author ?label "Ernest Hemmingway"@en .
+	?book wdt:P31 wd:Q571 .
+	?book wdt:P50 ?author .
+	OPTIONAL {
+		?book wdt:P136 ?genre .
+		?genre rdfs:label ?genre_label filter (lang(?genre_label) = "en").
+	}
+	OPTIONAL {
+		?book wdt:P179 ?series .
+		?series rdfs:label ?series_label filter (lang(?series_label) = "en").
+	}
+	OPTIONAL {
+		?book wdt:P577 ?publicationDate .
+	}
+	SERVICE wikibase:label {
+		bd:serviceParam wikibase:language "en" .
+	}
+}
+Limit 100
+
+# *******************************************************************************
+
+# Planeten
+
+SELECT ?objekt ?objektLabel ?planet ?planetLabel {
+
+	?objekt wdt:P31 wd:Q17444909 ;
+            wdt:P5869 ?planet .
+
+	SERVICE wikibase:label {
+		bd:serviceParam wikibase:language "en" .       
+	}
+}
+Order BY ?objekt
+Limit 50
+
+# ******************************************************************************
+
+#Musician
+
+select distinct ?name ?nameLabel ?nameDescription ?Stadt ?StadtLabel ?birth where {
+    ?name wdt:P106/wdt:P279* wd:Q639669 ;
+          wdt:P19 ?Stadt ;
+          wdt:P569 ?birth .
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en,de" }
+}
+Limit 50
+
+# ******************************************************************************
+
+# Gemälde
+
+SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creatorLabel ?collection ?collectionLabel WHERE {
+    ?painting wdt:P31 wd:Q3305213 ; 
+          wdt:P170 ?creator ; 
+          wdt:P195 ?collection . 
+  
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]" }
+}
+Limit 50
+
