@@ -155,7 +155,7 @@ do {
  $erstA = $bindings[$falscheAntwortlabel];
 $erstA=$erstA['value']; 
  } 
- while ($erstA ==$meineAntwort);
+ while (($erstA ==$meineAntwort) OR ($erstA ==""));
  
  
  do {
@@ -163,14 +163,14 @@ $erstA=$erstA['value'];
  $zweitA = $bindings[$falscheAntwortlabel];
  $zweitA =$zweitA ['value'];
   } 
- while (($erstA ==$zweitA)AND ($zweitA==$meineAntwort));
+ while (($erstA ==$zweitA)OR ($zweitA==$meineAntwort)OR ($zweitA ==""));
  
  do {
  $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
  $drittA = $bindings[$falscheAntwortlabel];
  $drittA=$drittA['value'];
 
-} while (($drittA ==$zweitA)AND ($drittA==$meineAntwort)AND($drittA ==$erstA));
+} while (($drittA ==$zweitA)OR ($drittA==$meineAntwort)OR($drittA ==$erstA) OR ($drittA ==""));
 
 $falscheAntwort =[
     0 => $erstA,
