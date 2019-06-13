@@ -1,4 +1,4 @@
-# Bücher
+﻿# Bücher
 
 SELECT ?book ?bookLabel ?authorLabel ?genre_label ?series_label ?publicationDate
 WHERE
@@ -62,4 +62,26 @@ SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creatorLabel ?col
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]" }
 }
 Limit 50
+
+
+# ******************************************************************************
+
+# Gemälde verbessert
+
+SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creator ?creatorLabel ?collection ?collectionLabel ?origin ?originLabel ?heigth ?weight WHERE {
+    ?painting wdt:P31 wd:Q3305213 .
+  
+        ?painting  wdt:P170 ?creator ; 
+                    
+          wdt:P135 ?genre ;
+          wdt:P495 ?origin; 
+          wdt:P2048 ?heigth ;
+          wdt:P2049 ?weight ;   
+          wdt:P195 ?collection .
+       ?creator rdfs:label ?creatorLabel .
+    FILTER CONTAINS(?creatorLabel, "Max" )          
+
+    SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
+}
+Limit 100
 
