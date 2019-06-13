@@ -1,0 +1,26 @@
+SELECT ?film ?filmLabel ?authorLabel ?genre_label ?series_label ?publicationDate ?duration
+WHERE
+{
+	?film wdt:P31 wd:Q11424 .
+	?film wdt:P50 ?author .
+	
+		#?film wdt:P136 ?genre .
+		#?genre rdfs:label ?genre_label filter (lang(?genre_label) = "en").
+	
+	OPTIONAL {
+		?film wdt:P179 ?series .
+		?series rdfs:label ?series_label filter (lang(?series_label) = "en").
+	}
+	
+	?film wdt:P577 ?publicationDate .
+	?film wdt:P2047 ?duration .
+	
+  FILTER (?publicationDate >= "2000-00-00T00:00:00Z"^^xsd:dateTime)
+  
+	SERVICE wikibase:label {
+		bd:serviceParam wikibase:language "en" .
+	}
+}
+
+ORDER by ?film
+Limit 100
