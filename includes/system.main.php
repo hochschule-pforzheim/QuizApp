@@ -57,7 +57,8 @@ Core::setTaskMap(array(
     'spielende'=>'',
     'archivdetail'=>'',
     'fragenerstellerschau'=>'controller.createquestionSchauspieler.php',
-    'fragenersteller'=>'controller.createquestionSchauspieler.php'
+    'fragenersteller'=>'controller.createquestionmain.php',
+    'autofrage'=>'controller.createquestion.php'
    ));
 
 
