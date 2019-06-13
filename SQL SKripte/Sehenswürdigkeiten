@@ -1,0 +1,18 @@
+
+#Sehenswürdigkeiten
+SELECT distinct ?touristattraction ?touristattractionLabel ?country ?countryLabel ?namedafterLabel ?architectLabel ?architectureLabel where{
+  ?touristattraction wdt:P31 wd:Q570116.
+       
+
+             ?touristattraction wdt:P17 ?country;
+                       wdt:P138 ?namedafter;
+                       wdt:P84 ?architect;
+                       wdt:P149 ?architecture;
+                         
+          
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "de" .
+
+  }
+} ORDER BY ?touristattraction
+Limit 100
