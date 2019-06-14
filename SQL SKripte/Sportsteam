@@ -1,0 +1,19 @@
+
+#Sportsteam
+SELECT distinct ?sportsteam ?sportsteamLabel ?countryLabel ?homevenueLabel ?leagueLabel ?headcoachLabel ?captainLabel where {
+  ?sportsteam wdt:P31 wd:Q15944511.
+  
+  ?sportsteam wdt:P17 ?country;
+              wdt:P115 ?homevenue;
+              wdt:P118 ?league;
+              wdt:P286 ?headcoach;
+             
+              
+          
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "de" .
+
+  }
+} ORDER BY ?sportsteamLabel
+
+Limit 100
