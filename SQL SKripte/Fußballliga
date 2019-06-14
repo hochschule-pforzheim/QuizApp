@@ -1,0 +1,18 @@
+
+#Liga
+SELECT distinct ?footballleague ?footballleagueLabel ?country ?countryLabel ?leaguelevelaboveLabel ?leaguelevelbelowLabel ?numberofparticipantsLabel ?seasonstartLabel where {
+  ?footballleague wdt:P31 wd:Q15991303 .
+   
+   ?footballleague wdt:P17 ?country;
+                   wdt:P2499 ?leaguelevelabove;
+                   wdt:P2500 ?leaguelevelbelow;
+                   wdt:P1132 ?numberofparticipants;
+                   wdt:P4794 ?seasonstart;
+          
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en" .
+
+  }
+} ORDER BY ?footballleague
+
+Limit 100
