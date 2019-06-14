@@ -1,0 +1,17 @@
+SELECT distinct ?food ?foodLabel ?origin ?originLabel
+where{
+
+
+  ?food wdt:P31 wd:Q746549 .
+  
+
+  ?food wdt:P495 ?origin;
+        
+           
+
+SERVICE wikibase:label {
+		bd:serviceParam wikibase:language "de" }
+  }
+  
+ORDER BY ?foodLabel
+LIMIT 500
