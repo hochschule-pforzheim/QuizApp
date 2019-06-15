@@ -1,0 +1,85 @@
+<?php
+
+		/* 
+		 * To change this license header, choose License Headers in Project Properties.
+		 * To change this template file, choose Tools | Templates
+		 * and open the template in the editor.
+		 */
+
+		$url = https://query.wikidata.org/#%20%20%20%20%0ASELECT%20distinct%20%3Ffood%20%3FfoodLabel%20%3Forigin%20%3ForiginLabel%0Awhere%7B%0A%0A%0A%20%20%3Ffood%20wdt%3AP31%20wd%3AQ746549%20.%0A%20%20%0A%0A%20%20%3Ffood%20wdt%3AP495%20%3Forigin%3B%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3FfoodLabel%0ALIMIT%20500
+
+
+		$string = file_get_contents($url);
+		$json_result = json_decode($string, true);
+
+
+
+		$results = $json_result['results'];
+		$bindingsarray = $results['bindings'];
+
+		for ($i = 1; $i <= count($bindingsarray); $i++) {
+
+		$bindings = $results['bindings'][$i] ; 
+		$foodLabel = $bindings[foodLabel];
+		$food = $foodLabel ['value'];
+
+
+		$meinefrage ="Woher kommt $food?";
+		$meinekat =12;
+		$meineAntwort =$origin;
+		$falscheAntwort ="";
+		$falscheAntwortlabel ='originLabel';
+		createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
+
+
+		$frage=new Frage;
+		$frage->beschreibung = $meinefrage;
+		$frage->Kategorie = $meinekat;
+		$frage->antwortzeit = 10;
+		$frage->create(); // gibt Im Idealfall eingegebene ID zurück, sonst 0/false
+
+
+		$antwort=new Antwort;
+		$antwort->Antworttext=$meineAntwort;
+		$antwort->korrekt=1;
+		$antwort->to_Frage = $frage->m_oid;  
+		$antwort->create();
+
+		do { 
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $erstA = $bindings[$falscheAntwortlabel];
+		$erstA=$erstA['value']; 
+		 } 
+		 while ($erstA ==$meineAntwort);
+
+
+		 do {
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $zweitA = $bindings[$falscheAntwortlabel];
+		 $zweitA =$zweitA ['value'];
+		  } 
+		 while (($erstA ==$zweitA)AND ($zweitA==$meineAntwort));
+
+		 do {
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $drittA = $bindings[$falscheAntwortlabel];
+		 $drittA=$drittA['value'];
+
+		} while (($drittA ==$zweitA)AND ($drittA==$meineAntwort)AND($drittA ==$erstA));
+
+		$falscheAntwort =[
+		    0 => $erstA,
+		     1 =>$zweitA,
+		     2 =>$drittA];
+
+
+		for ($i = 0; $i < 3; $i++) { 
+
+
+		$antwort->Antworttext=$falscheAntwort[$i];
+		$antwort->korrekt=0;
+		$antwort->to_Frage = $frage->m_oid;  
+		$antwort->create();
+		} 
+
+		};
