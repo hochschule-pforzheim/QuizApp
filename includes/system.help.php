@@ -339,7 +339,121 @@ public static function  arrSortObjsByKey($key, $order = 'DESC') {
    }       
    
    
+public static function questioncreator($url, $labels, $meineKat,$fragestellung) {
+    
+    
+
+$string = file_get_contents($url);
+$json_result = json_decode($string, true);
+$results = $json_result['results'];
+$bindingsarray = $results['bindings'];
+$header = $json_result['head'];
+$vars = $header['vars'];
+$primarykey = $vars[1];
+
+
+for ($i = 0; $i < 10; $i++) {
+    
+ do { 
    
+$bindings = $results['bindings'][$i] ; 
+$primarykeylabel = $bindings[$primarykey];
+$primarykeyvalue = $primarykeylabel['value'];
+ $i++;
+ $bindings2 = $results['bindings'][$i] ; 
+$primarykeylabel2 = $bindings2[$primarykey];
+$primarykeyvalue2 = $primarykeylabel2['value'];
+$firstletter = substr($primarykeyvalue,0,0);
+ } 
+ while (($primarykeyvalue ==$primarykeyvalue2) OR ($firstletter == "Q"));  
+ 
+  $i--; 
+  
+$meinekat =8;
+$primarykeyvalueold = $primarykeyvalue;
+$j = 0;
+
+Foreach ($fragestellung as $quest){
+$pos = strpos($quest,"XXXXX");
+
+$frage = substr($quest,0,$pos);
+$fragenende = substr($quest,$pos+5); 
+$questions[$j] = "$frage $primarykeyvalue$fragenende";
+$j++;
+};
+
+ 
+$k = 0;
+foreach ($labels as &$value) {
+      
+$label = $bindings[$value];
+$wert = $label['value'];
+$meinefrage = $questions[$k];
+$falscheAntwortlabel =$value;
+
+$meineAntwort =$wert;
+ $k++;
+Help::createsmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwortlabel,$results,$bindingsarray);
+}
+  
+}
+
+}
+public static function createsmyquestion($meinefrage, $meinekat, $meineAntwort,$falscheAntwortlabel,$results,$bindingsarray) {
+    
+$frage=new Frage;
+$frage->beschreibung = $meinefrage;
+$frage->Kategorie = $meinekat;
+$frage->antwortzeit = 10;
+$frage->create(); // gibt Im Idealfall eingegebene ID zurück, sonst 0/false
+
+$antwort=new Antwort;
+$antwort->Antworttext=$meineAntwort;
+$antwort->korrekt=1;
+$antwort->to_Frage = $frage->m_oid;  
+$antwort->create();
+
+do {
+
+ $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+ $erstA = $bindings[$falscheAntwortlabel];
+$erstA=$erstA['value'];
+$firstletter = substr($erstA,0,0); 
+ } 
+ while (($erstA ==$meineAntwort) OR ($erstA =="")OR ($firstletter == "Q"));
+ 
+ do {
+
+ $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+ $zweitA = $bindings[$falscheAntwortlabel];
+ $zweitA =$zweitA ['value'];
+ $firstletter = substr($zweitA,0,0);
+  } 
+ while (($erstA ==$zweitA)OR ($zweitA==$meineAntwort)OR ($zweitA =="")OR ($firstletter == "Q"));
+ 
+ do {
+
+ $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+ $drittA = $bindings[$falscheAntwortlabel];
+ $drittA=$drittA['value'];
+ $firstletter = substr($drittA,0,0);
+} 
+while (($drittA ==$zweitA)OR ($drittA==$meineAntwort)OR($drittA ==$erstA) OR ($drittA =="")OR ($firstletter == "Q"));
+
+
+$falscheAntwort =[
+    0 => $erstA,
+     1 =>$zweitA,
+     2 =>$drittA];
+
+for ($i = 0; $i < 3; $i++) {     
+   
+$antwort->Antworttext=$falscheAntwort[$i];
+$antwort->korrekt=0;
+$antwort->to_Frage = $frage->m_oid;  
+$antwort->create();
+} 
+}   
    
    
    
