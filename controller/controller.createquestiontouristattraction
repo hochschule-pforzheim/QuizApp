@@ -1,0 +1,180 @@
+<?php
+		
+		/* 
+		 * To change this license header, choose License Headers in Project Properties.
+		 * To change this template file, choose Tools | Templates
+		 * and open the template in the editor.
+		 */
+		
+		$url = https://query.wikidata.org/#%0A%23Sehensw%C3%BCrdigkeiten%0ASELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100
+
+	
+
+		
+		
+		$string = file_get_contents($url);
+		$json_result = json_decode($string, true);
+		
+		
+		
+		$results = $json_result['results'];
+		$bindingsarray = $results['bindings'];
+		
+		for ($i = 1; $i <= count($bindingsarray); $i++) {
+		    
+		$bindings = $results['bindings'][$i] ; 
+		$touristattractionLabel = $bindings[touristattractionLabel];
+		$touristattraction = $touristattractionLabel['value'];
+		
+		$bindings = $results['bindings'][$i] ; 
+		$countryLabel = $bindings[countryLabel];
+		$country = $ countryLabel ['value'];
+		
+		$bindings = $results['bindings'][$i] ; 
+		$namedafterLabel = $bindings[namedafterLabel];
+		$namedafter = $ namedafterLabel ['value'];
+		
+		$bindings = $results['bindings'][$i] ; 
+		$architectLabel = $bindings[architectLabel];
+		$architect = $ architectLabel ['value'];
+		
+
+
+
+		
+		$bindings = $results['bindings'][$i] ; 
+		$architectureLabel = $bindings['architectureLabel'];
+		$architecturename = $architectureLabel['value'];
+		
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		
+		$meinefrage ="In welchem Land befindet sich $touristattraction?";
+		$meinekat =11;
+		$meineAntwort =$country;
+		$falscheAntwort ="";
+		$falscheAntwortlabel ='countryLabel';
+		createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
+		
+		$meinefrage ="Nach wem wurde $touristattraction benannt?";
+		$meinekat =11;
+		$meineAntwort =$namedafter;
+		$falscheAntwort ="";
+		$falscheAntwortlabel ='namedafterLabel';
+		createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
+		
+
+
+
+
+
+
+		
+		$meinefrage ="Wer ist der Architekt von $touristattraction?";
+		$meinekat =11;
+		$meineAntwort =$architect;
+		$falscheAntwort ="";
+		$falscheAntwortlabel ='architectLabel';
+		createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
+		
+		$meinefrage ="Wie heißt der Baustil von $touristattraction?";
+		$meinekat =11;
+		$meineAntwort =$architecture;
+		$falscheAntwort ="";
+		$falscheAntwortlabel ='architectureLabel';
+		createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
+		
+		}
+		
+		
+		
+		
+		function createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray) {
+		
+		$frage=new Frage;
+		$frage->beschreibung = $meinefrage;
+		$frage->Kategorie = $meinekat;
+		$frage->antwortzeit = 10;
+		$frage->create(); // gibt Im Idealfall eingegebene ID zurück, sonst 0/false
+		
+		
+		$antwort=new Antwort;
+		$antwort->Antworttext=$meineAntwort;
+		$antwort->korrekt=1;
+		$antwort->to_Frage = $frage->m_oid;  
+		$antwort->create();
+		
+		do { 
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $erstA = $bindings[$falscheAntwortlabel];
+		$erstA=$erstA['value']; 
+		 } 
+		 while ($erstA ==$meineAntwort);
+		 
+		 
+		 do {
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $zweitA = $bindings[$falscheAntwortlabel];
+		 $zweitA =$zweitA ['value'];
+		  } 
+		 while (($erstA ==$zweitA)AND ($zweitA==$meineAntwort));
+		 
+		 do {
+		 $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
+		 $drittA = $bindings[$falscheAntwortlabel];
+		 $drittA=$drittA['value'];
+		
+		} while (($drittA ==$zweitA)AND ($drittA==$meineAntwort)AND($drittA ==$erstA));
+		
+		$falscheAntwort =[
+		    0 => $erstA,
+		     1 =>$zweitA,
+		     2 =>$drittA];
+		
+		
+		for ($i = 0; $i < 3; $i++) { 
+		 
+		    
+		    
+		  
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+		    
+		   
+		
+		$antwort->Antworttext=$falscheAntwort[$i];
+		$antwort->korrekt=0;
+		$antwort->to_Frage = $frage->m_oid;  
+		$antwort->create();
+		} 
+		
+		};
+		
