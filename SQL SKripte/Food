@@ -1,3 +1,4 @@
+    
 SELECT distinct ?food ?foodLabel ?origin ?originLabel
 where{
 
@@ -5,12 +6,13 @@ where{
   ?food wdt:P31 wd:Q746549 .
   
 
-  ?food wdt:P495 ?origin;
+  ?food wdt:P495 ?origin.
         
-           
+       ?food rdfs:label ?foodLabel .
+    FILTER ((CONTAINS(?foodLabel, "a" ))||(CONTAINS(?foodLabel, "b" ))||(CONTAINS(?foodLabel, "c" ))||(CONTAINS(?foodLabel, "d" ))||(CONTAINS(?foodLabel, "e" ))||(CONTAINS(?foodLabel, "f" ))||(CONTAINS(?foodLabel, "g" ))||(CONTAINS(?foodLabel, "h" ))||(CONTAINS(?foodLabel, "i" ))||(CONTAINS(?foodLabel, "j" ))||(CONTAINS(?foodLabel, "k" ))||(CONTAINS(?foodLabel, "l" ))||(CONTAINS(?foodLabel, "m" ))||(CONTAINS(?foodLabel, "n" ))||(CONTAINS(?foodLabel, "o" ))||(CONTAINS(?foodLabel, "p" ))||(CONTAINS(?foodLabel, "s" ))||(CONTAINS(?foodLabel, "t" ))||(CONTAINS(?foodLabel, "u" ))||(CONTAINS(?foodLabel, "v" ))||(CONTAINS(?foodLabel, "w" ))||(CONTAINS(?foodLabel, "z" )) )         
 
 SERVICE wikibase:label {
-		bd:serviceParam wikibase:language "de" }
+		bd:serviceParam wikibase:language "de,en" }
   }
   
 ORDER BY ?foodLabel

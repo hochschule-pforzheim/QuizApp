@@ -1,21 +1,4 @@
-#Alle Nobelpreisträger
 
-SELECT DISTINCT ?item ?itemLabel ?stadt ?stadtLabel ?birth ?nobel_price_chemistryLabel WHERE {
-  
-  ?item wdt:P166/wdt:P31? wd:Q7191 ;
-  OPTIONAL { ?item wdt:P19 ?stadt ; 
-           }
-  OPTIONAL { ?item wdt:P569 ?birth . 
-           }
-
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en" .
-  }
-}
-
-ORDER by ?birth
-
-#########################################################################################
 
 #Friedensnobelpreis
 
@@ -31,7 +14,7 @@ WHERE {
   
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
-  
+  FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
 }
@@ -54,6 +37,7 @@ WHERE {
   
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
+FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -77,6 +61,7 @@ WHERE {
   
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
+FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -100,6 +85,7 @@ WHERE {
   
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
+FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -123,6 +109,7 @@ WHERE {
   
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
+FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
