@@ -47,7 +47,28 @@ $fragestellung =[
       
       
       Help::questioncreator($url,$labels,7,$fragestellung);
+
+       
+      $url ="https://query.wikidata.org/sparql?format=json&query=#%0A%23Sportsteam%0ASELECT%20distinct%20%3Fsportsteam%20%3FsportsteamLabel%20%3FcountryLabel%20%3FhomevenueLabel%20%3FleagueLabel%20%3FheadcoachLabel%20%3FcaptainLabel%20where%20%7B%0A%20%20%3Fsportsteam%20wdt%3AP31%20wd%3AQ15944511.%0A%20%20%0A%20%20%3Fsportsteam%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP115%20%3Fhomevenue%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP118%20%3Fleague%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP286%20%3Fheadcoach%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3FsportsteamLabel%0A%0ALimit%20100" ;
     
+      $labels =array(
+    "countryLabel",
+    "homevenueLabel",
+    "leagueLabel",
+    "headcoachLabel");
+      
+      
+$fragestellung =[
+    0 => "In welchem Land spielt XXXXX?",    
+    1 =>"Wie heisst das Heimstadion von XXXXX?",
+    2 =>"In welcher Liga spielt XXXXX?",
+    3 =>"Wer ist der Trainer von XXXXX?"
+    ];
+      
+      
+      
+      Help::questioncreator($url,$labels,7,$fragestellung);
+      
     
 }elseif ($kat=="8"){
 
