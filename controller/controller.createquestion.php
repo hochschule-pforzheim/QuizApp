@@ -117,7 +117,25 @@ $fragestellung =[
       
       Help::questioncreator($url,$labels,9,$fragestellung);
     
+      
     
+      $url = "https://query.wikidata.org/sparql?format=json&query=#%23museum%0ASELECT%20distinct%20%3Fmuseum%20%3FmuseumLabel%20%3FmainsubjectLabel%20%3FcountryLabel%20%3FfounderLabel%20where%20%7B%0A%20%20%3Fmuseum%20wdt%3AP31%20wd%3AQ33506.%0A%20%20%3Fmuseum%20wdt%3AP921%20%3Fmainsubject%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%23wdt%3AP112%20%3Ffounder%3B%0A%20%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fmuseum%20%0ALimit%20100"
+      
+      $labels =array(
+    "mainsubjectLabel",
+    "countryLabel",
+    "founderLabel");
+
+$fragestellung =[
+    0 => "Was ist das Thema der Ausstellung des Museums XXXXX?",    
+    1 =>"In welchem Land befindet sich XXXXX?",
+    2 =>"Wer hat XXXXX gegründet?"
+    ];
+      
+      
+      Help::questioncreator($url,$labels,9,$fragestellung);
+            
+            
     
 }elseif ($kat=="10"){
 // Kategorie Bio
@@ -126,84 +144,25 @@ $fragestellung =[
          $url = "https://query.wikidata.org/#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
 
 $labels =array(
-    "countryshipLabel",
-    "birthplaceLabel",
-    "birthdateLabel");
+    "taxonnameLabel",
+    "foodLabel",
+    "habitatLabel",
+    "edemicLabel");
 
 $fragestellung =[
-    0 => "Welche Nationalität gehört XXXXX an?",    
-    1 =>"Wann ist XXXXX geboren?",
-    2 =>"Wo ist XXXXX geboren?"
+    0 => "Wie heisst die Überart von XXXXX?",    
+    1 =>"Was fressen XXXXX?",
+    2 =>"Wo leben XXXXX?"
+    3 =>"Wo fühlen sich XXXXX am wohlstenß",
+    4 =>"Welches Tier lebt in XXXXX?",
     ];
       
       
       
-      Help::questioncreator($url,$labels,9,$fragestellung);  
+      Help::questioncreator($url,$labels,10,$fragestellung);  
     
-$url = "https://query.wikidata.org/#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
-
-$string = file_get_contents($url);
-$json_result = json_decode($string, true);
-$results = $json_result['results'];
-$bindingsarray = $results['bindings'];
-for ($i = 1; $i <= count($bindingsarray); $i++) {
-   
-   
-$bindings = $results['bindings'][$i] ; 
-$animalLabel = $bindings['animalLabel'];
-$animalname = $animalLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$taxonname = $bindings['taxonname'];
-$taxon = $taxonname['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$habitatLabel = $bindings['habitatLabel'];
-$habitat = $habitatLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$foodLabel = $bindings['foodLabel'];
-$food = $foodLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$edemicLabel = $bindings['edemicLabel'];
-$edemic = $edemicLabel['value'];
 
 
-$meinefrage ="Wie heißt die Überart von $animalname?";
-$meinekat =$kat;
-$meineAntwort =$taxon;
-$falscheAntwort ="";
-$falscheAntwortlabel ='animalLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Was fressen $animalname?";
-$meinekat =$kat;
-$meineAntwort =$food;
-$falscheAntwort ="";
-$falscheAntwortlabel ='foodLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Wo leben $animalname?";
-$meinekat =$kat;
-$meineAntwort =$edemic;
-$falscheAntwort ="";
-$falscheAntwortlabel ='edemicLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Wo fühlen sich $animalname am wohlsten?";
-$meinekat =$kat;
-$meineAntwort =$habitat;
-$falscheAntwort ="";
-$falscheAntwortlabel ='habitatLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Welches Tier lebt in $edemic?";
-$meinekat =$kat;
-$meineAntwort =$animalname;
-$falscheAntwort ="";
-$falscheAntwortlabel ='animalname';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
 
 }
 
@@ -232,6 +191,21 @@ Help::questioncreator($url,$labels,11,$fragestellung);
     
     
     
+     $url = "https://query.wikidata.org/sparql?format=json&query=#%23tower%0ASELECT%20distinct%20%3Ftower%20%3FtowerLabel%20%3FheightLabel%20%3FcountryLabel%20%0AWHERE%20%7B%0A%20%20%0A%20%20%7B%0A%09%09SELECT%20%3Fcountry%20%28MAX%28%3Fheight%29%20AS%20%3Fheight%29%20%20WHERE%20%7B%0A%09%09%09%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%09%09%7D%0A%09%09GROUP%20BY%20%3Fcountry%0A%09%09ORDER%20BY%20DESC%28%3Fheight%29%7D%0A%20%20%0A%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518.%0A%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%0A%20%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftower%20%0ALimit%20100%0A";
+      
+      $labels =array(
+        "countryLabel",
+        "heightLabel",
+        );
+
+$fragestellung =[
+            0 => "Wo liegt der Turm XXXXX?",    
+            1 =>"Wie hoch ist der Turm XXXXX?",
+            ];
+Help::questioncreator($url,$labels,11,$fragestellung); 
+      
+      
+      
     
 }elseif ($kat=="12"){
 // Kategorie Kultur
