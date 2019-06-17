@@ -51,7 +51,7 @@ $fragestellung =[
        
       $url ="https://query.wikidata.org/sparql?format=json&query=#%0A%23Sportsteam%0ASELECT%20distinct%20%3Fsportsteam%20%3FsportsteamLabel%20%3FcountryLabel%20%3FhomevenueLabel%20%3FleagueLabel%20%3FheadcoachLabel%20%3FcaptainLabel%20where%20%7B%0A%20%20%3Fsportsteam%20wdt%3AP31%20wd%3AQ15944511.%0A%20%20%0A%20%20%3Fsportsteam%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP115%20%3Fhomevenue%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP118%20%3Fleague%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP286%20%3Fheadcoach%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3FsportsteamLabel%0A%0ALimit%20100" ;
     
-      $labels =array(
+$labels =array(
     "countryLabel",
     "homevenueLabel",
     "leagueLabel",
@@ -97,9 +97,95 @@ $fragestellung =[
     ];
 
     Help::questioncreator($url,$labels,8,$fragestellung);
+      
+      
+      $url = "https://query.wikidata.org/sparql?format=json&query=#%23L%C3%A4ngste%20Fl%C3%BCsse%20jedes%20Kontinents%0A%23added%20before%202016-10%0A%0ASELECT%20%3Fcontinent%20%3Friver%20%3FcontinentLabel%20%3FriverLabel%20%3FlengthLabel%0AWHERE%0A%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3Fcontinent%20%28MAX%28%3Flength%29%20AS%20%3Flength%29%0A%20%20%20%20WHERE%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%3Friver%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ355304%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2043%20%3Flength%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP30%20%3Fcontinent.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3Fcontinent%0A%20%20%7D%0A%20%20%3Friver%20wdt%3AP31%2Fwdt%3AP279%2a%20wd%3AQ355304%3B%0A%20%20%20%20%20%20%20%20%20wdt%3AP2043%20%3Flength%3B%0A%20%20%20%20%20%20%20%20%20wdt%3AP30%20%3Fcontinent.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%7D%0AORDER%20BY%20%3FcontinentLabel"
     
+$labels =array(
+    "lengthLabel",
+    "continentLabel");
+
+
+$fragestellung =[
+    0 => "Wie lang ist der Fluss XXXXX?",    
+    1 =>"Auf welchem Kontinent liegt der Fluss XXXXX?",
+    ];
+
+    Help::questioncreator($url,$labels,8,$fragestellung);
+      
+      
+      
+      
+      $url = "https://query.wikidata.org/sparql?format=json&query=#SELECT%20%3Fobjekt%20%3FobjektLabel%20%3Fplanet%20%3FplanetLabel%20%3Fmass%20%3Fdistance%20%3Fperiod%20%20%7B%0A%0A%3Fobjekt%20wdt%3AP31%20wd%3AQ17444909%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP5869%20%3Fplanet%20.%0A%0A%20%20%3Fplanet%20wdt%3AP2067%20%3Fmass%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2583%20%3Fdistance%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2146%20%3Fperiod%20.%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%0Abd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%7D%0A%0A%7D%0A%0AOrder%20BY%20%3Fobjekt%0A%0ALimit%2050"
+      
+            
+$labels =array(
+    "massLabel",
+    "distanceLabel"
+    "periodLabel");
+
+
+$fragestellung =[
+    0 => "Was ist die Masse des Planeten XXXXX?",    
+    1 =>"Wie weit ist der Planet XXXXX von der Erde entfernt?",
+    2=>"Wie lange ist eine sideriche Periode bei XXXXX?",  
+    ];
+
+    Help::questioncreator($url,$labels,8,$fragestellung);
+      
+            
+      
 }elseif ($kat=="9"){
-// Kategorie Kunst
+// Kategorie Kunst und Kultur
+      
+         $url = "https://query.wikidata.org/sparql?format=json&query=#%23Musician%0A%0Aselect%20distinct%20%3Fname%20%3FnameLabel%20%3FnameDescription%20%3FStadt%20%3FStadtLabel%20%3Fbirth%20where%20%7B%0A%20%20%20%20%3Fname%20wdt%3AP106%2Fwdt%3AP279%2a%20wd%3AQ639669%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP19%20%3FStadt%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP569%20%3Fbirth%20.%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%2Cde%22%20%7D%0A%7D%0ALimit%2050"
+      
+      $labels =array(
+        "StadtLabel",
+        "birthLabel",
+        );
+
+    $fragestellung =[
+            0 => "Was ist der Geburtsort von XXXXX?",    
+            1 =>"Wann wurde XXXXX geboren?",
+            ];
+      
+    Help::questioncreator($url,$labels,9,$fragestellung);
+      
+      
+        $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20DISTINCT%20%3Fpainting%20%3FpaintingLabel%20%3FpaintingDescription%20%3Fcreator%20%3FcreatorLabel%20%3Fcollection%20%3FcollectionLabel%20%3Forigin%20%3ForiginLabel%20%3Fheigth%20%3Fweight%20WHERE%20%7B%0A%20%20%20%20%3Fpainting%20wdt%3AP31%20wd%3AQ3305213%20.%0A%20%20%0A%20%20%20%20%20%20%20%20%3Fpainting%20%20wdt%3AP170%20%3Fcreator%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP135%20%3Fgenre%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP495%20%3Forigin%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2048%20%3Fheigth%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2049%20%3Fweight%20%3B%20%20%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP195%20%3Fcollection%20.%0A%20%20%20%20%20%20%20%3Fcreator%20rdfs%3Alabel%20%3FcreatorLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FcreatorLabel%2C%20%22della%22))%20%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Dal%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Monet%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Cassat%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Gogh%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22recht%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22da%22%20)))%20%20%20%20%20%20%20%20%20%20%0A%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D%0ALimit%20100";
+
+    $labels =array(
+        "creatorLabel",
+        "collectionLabel",
+        "originLabel",
+        "weight"
+        );
+
+    $fragestellung =[
+            0 => "Von wem stammt das Gemälde XXXXX?",    
+            1 =>"Wo wird das Gemälde XXXXX ausgestellt?",
+            2 =>"Wo wurde das Gemälde XXXXX gemalt?",
+            3 =>"Wo wird das Gemälde XXXXX ausgestellt?",
+            4 =>"Wie breit ist das Gemälde XXXXX?",
+            ];
+      
+    Help::questioncreator($url,$labels,9,$fragestellung);
+    
+    
+        $url = "https://query.wikidata.org/sparql?format=json&query=%20%20%20%20%0ASELECT%20distinct%20%3Ffood%20%3FfoodLabel%20%3Forigin%20%3ForiginLabel%0Awhere%7B%0A%0A%0A%20%20%3Ffood%20wdt%3AP31%20wd%3AQ746549%20.%0A%20%20%0A%0A%20%20%3Ffood%20wdt%3AP495%20%3Forigin.%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%3Ffood%20rdfs%3Alabel%20%3FfoodLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FfoodLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22b%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22c%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22d%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22f%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22g%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22h%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22j%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22k%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22l%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22m%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22n%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22o%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22p%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22s%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22t%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22v%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22w%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22z%22%20))%20)%20%20%20%20%20%20%20%20%20%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%2Cen%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3FfoodLabel%0ALIMIT%20500";
+
+    $labels =array(
+        "originLabel"
+        );
+
+    $fragestellung =[
+            0 => "Aus welchem Land stammt XXXXX ursrpünglich?",
+            ];
+      
+    Help::questioncreator($url,$labels,9,$fragestellung);
+      
+      
          $url = "https://query.wikidata.org/sparql?format=json&query=%23Schauspieler%0A%0ASELECT%20%3Fhuman%20%3FhumanLabel%20%3Fbirthdate%20%3FbirthdateLabel%20%3Fgender%20%3FgenderLabel%20%3Ffilmography%20%3FfilmographyLabel%20%3Fcountryship%20%3FcountryshipLabel%20%3Fbirthplace%20%3FbirthplaceLabel%0AWHERE%20%7B%0A%0A%20%20%0A%20%20%3Fhuman%20wdt%3AP31%20wd%3AQ5%20%3B%20%0A%20%20%20%20%20%20%20%20%20wdt%3AP106%20wd%3AQ33999.%0A%0A%20%20%0A%3Fhuman%20wdt%3AP1283%20%3Ffilmography%20%3B%20%0Awdt%3AP21%20%3Fgender%20%3B%0Awdt%3AP27%20%3Fcountryship%20%3B%0Awdt%3AP19%20%3Fbirthplace%20%3B%0Awdt%3AP569%20%3Fbirthdate%20%3B%0AFILTER((%3Fbirthdate%20%3E%3D%20%221950-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20%26%26%20(%3Fbirthdate%20%3C%3D%20%222018-12-31T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime))%0A%20%20%20%20%20%20%20%0A%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3Fhuman%0ALIMIT%201000%0A";
 
 $labels =array(
@@ -121,7 +207,7 @@ $fragestellung =[
     
       $url = "https://query.wikidata.org/sparql?format=json&query=#%23museum%0ASELECT%20distinct%20%3Fmuseum%20%3FmuseumLabel%20%3FmainsubjectLabel%20%3FcountryLabel%20%3FfounderLabel%20where%20%7B%0A%20%20%3Fmuseum%20wdt%3AP31%20wd%3AQ33506.%0A%20%20%3Fmuseum%20wdt%3AP921%20%3Fmainsubject%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%23wdt%3AP112%20%3Ffounder%3B%0A%20%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fmuseum%20%0ALimit%20100"
       
-      $labels =array(
+$labels =array(
     "mainsubjectLabel",
     "countryLabel",
     "founderLabel");
@@ -134,14 +220,32 @@ $fragestellung =[
       
       
       Help::questioncreator($url,$labels,9,$fragestellung);
-            
+       
+      
+      $url = "https://query.wikidata.org/sparql?format=json&query=#SELECT%20%3Fbook%20%3FbookLabel%20%3FauthorLabel%20%3Fgenre_label%20%3Fseries_label%20%3FpublicationDate%0AWHERE%0A%7B%0A%09%3Fbook%20wdt%3AP31%20wd%3AQ571%20.%0A%09%3Fbook%20wdt%3AP50%20%3Fauthor%20.%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP136%20%3Fgenre%20.%0A%09%09%3Fgenre%20rdfs%3Alabel%20%3Fgenre_label%20filter%20%28lang%28%3Fgenre_label%29%20%3D%20%22en%22%29.%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP179%20%3Fseries%20.%0A%09%09%3Fseries%20rdfs%3Alabel%20%3Fseries_label%20filter%20%28lang%28%3Fseries_label%29%20%3D%20%22en%22%29.%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP577%20%3FpublicationDate%20.%0A%09%7D%0A%09SERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%09%7D%0A%7D%0ALimit%20100"
+      
+$labels =array(
+    "authorLabel",
+    "genreLabel",
+    "seriesLabel"
+    "publicationDateLabel");
+
+$fragestellung =[
+    0 => "Wer ist Autor des Buches XXXXX?",    
+    1 =>"Zu welchem Genre gehört das Buch XXXXX?",
+    2 =>"Zu welcher Buchreihe gehört das Buch XXXXX ?"
+    3 =>"Wann ist das Buch XXXXX erschienen?",  
+    ];
+      
+      
+      Help::questioncreator($url,$labels,9,$fragestellung);
             
     
 }elseif ($kat=="10"){
 // Kategorie Bio
     
 
-         $url = "https://query.wikidata.org/#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
+         $url = "https://query.wikidata.org/sparql?format=json&query=#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
 
 $labels =array(
     "taxonnameLabel",
@@ -169,10 +273,7 @@ $fragestellung =[
 }elseif ($kat=="11"){
 // Kategorie Architektur
     
-    
-    
-    
-$url = "https://query.wikidata.org/sparql?format=json&query=%0A%23Sehensw%C3%BCrdigkeiten%0ASELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100";
+      $url = "https://query.wikidata.org/sparql?format=json&query=%0A%23Sehensw%C3%BCrdigkeiten%0ASELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100";
 
 $labels =array(
         "countryLabel",
@@ -187,13 +288,14 @@ $fragestellung =[
             2 =>"Wer war der Architect von XXXXX?",
             3 =>"In welchen Architekturstil passt XXXXX?",
             ];
-Help::questioncreator($url,$labels,11,$fragestellung); 
+      
+      Help::questioncreator($url,$labels,11,$fragestellung); 
     
     
     
      $url = "https://query.wikidata.org/sparql?format=json&query=#%23tower%0ASELECT%20distinct%20%3Ftower%20%3FtowerLabel%20%3FheightLabel%20%3FcountryLabel%20%0AWHERE%20%7B%0A%20%20%0A%20%20%7B%0A%09%09SELECT%20%3Fcountry%20%28MAX%28%3Fheight%29%20AS%20%3Fheight%29%20%20WHERE%20%7B%0A%09%09%09%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%09%09%7D%0A%09%09GROUP%20BY%20%3Fcountry%0A%09%09ORDER%20BY%20DESC%28%3Fheight%29%7D%0A%20%20%0A%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518.%0A%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%0A%20%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftower%20%0ALimit%20100%0A";
       
-      $labels =array(
+$labels =array(
         "countryLabel",
         "heightLabel",
         );
@@ -202,51 +304,13 @@ $fragestellung =[
             0 => "Wo liegt der Turm XXXXX?",    
             1 =>"Wie hoch ist der Turm XXXXX?",
             ];
-Help::questioncreator($url,$labels,11,$fragestellung); 
+      
+      Help::questioncreator($url,$labels,11,$fragestellung); 
       
       
       
     
-}elseif ($kat=="12"){
-// Kategorie Kultur
-    
-
-        
-        
-    $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20DISTINCT%20%3Fpainting%20%3FpaintingLabel%20%3FpaintingDescription%20%3Fcreator%20%3FcreatorLabel%20%3Fcollection%20%3FcollectionLabel%20%3Forigin%20%3ForiginLabel%20%3Fheigth%20%3Fweight%20WHERE%20%7B%0A%20%20%20%20%3Fpainting%20wdt%3AP31%20wd%3AQ3305213%20.%0A%20%20%0A%20%20%20%20%20%20%20%20%3Fpainting%20%20wdt%3AP170%20%3Fcreator%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP135%20%3Fgenre%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP495%20%3Forigin%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2048%20%3Fheigth%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2049%20%3Fweight%20%3B%20%20%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP195%20%3Fcollection%20.%0A%20%20%20%20%20%20%20%3Fcreator%20rdfs%3Alabel%20%3FcreatorLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FcreatorLabel%2C%20%22della%22))%20%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Dal%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Monet%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Cassat%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22Gogh%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22recht%22%20))%7C%7C%20(CONTAINS(%3FcreatorLabel%2C%22da%22%20)))%20%20%20%20%20%20%20%20%20%20%0A%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20%7D%0A%7D%0ALimit%20100";
-
-    $labels =array(
-        "creatorLabel",
-        "collectionLabel",
-        "originLabel",
-        "weight"
-        );
-
-    $fragestellung =[
-            0 => "Von wem stammt das Gemälde XXXXX?",    
-            1 =>"Wo wird das Gemälde XXXXX ausgestellt?",
-            2 =>"Wo wurde das Gemälde XXXXX gemalt?",
-            3 =>"Wo wird das Gemälde XXXXX ausgestellt?",
-            4 =>"Wie breit ist das Gemälde XXXXX?",
-            ];
-    Help::questioncreator($url,$labels,12,$fragestellung);
-    
-    
-        $url = "https://query.wikidata.org/sparql?format=json&query=%20%20%20%20%0ASELECT%20distinct%20%3Ffood%20%3FfoodLabel%20%3Forigin%20%3ForiginLabel%0Awhere%7B%0A%0A%0A%20%20%3Ffood%20wdt%3AP31%20wd%3AQ746549%20.%0A%20%20%0A%0A%20%20%3Ffood%20wdt%3AP495%20%3Forigin.%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%3Ffood%20rdfs%3Alabel%20%3FfoodLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FfoodLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22b%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22c%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22d%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22f%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22g%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22h%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22j%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22k%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22l%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22m%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22n%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22o%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22p%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22s%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22t%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22v%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22w%22%20))%7C%7C(CONTAINS(%3FfoodLabel%2C%20%22z%22%20))%20)%20%20%20%20%20%20%20%20%20%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%2Cen%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3FfoodLabel%0ALIMIT%20500";
-
-    $labels =array(
-        "originLabel"
-        );
-
-    $fragestellung =[
-            0 => "Aus welchem Land stammt XXXXX ursrpünglich?",
-            ];
-    Help::questioncreator($url,$labels,12,$fragestellung);
-    
-    
-    
-
-    
+  
     
     
 }elseif ($kat=="13"){
