@@ -369,7 +369,7 @@ $firstletter = substr($primarykeyvalue,0,0);
  
   $i--; 
   
-$meinekat =8;
+$meinekat =$meineKat;
 $primarykeyvalueold = $primarykeyvalue;
 $j = 0;
 
