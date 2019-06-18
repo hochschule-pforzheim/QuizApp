@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Studium/Semester7/SE/QuizApp/includes/system.main.php</file>
             <file>file:/C:/Studium/Semester7/SE/QuizApp/controller/controller.createquestion.php</file>
-            <file>file:/C:/Studium/Semester7/SE/QuizApp/includes/system.db.php</file>
-            <file>file:/C:/Studium/Semester7/SE/QuizApp/includes/system.help.php</file>
-            <file>file:/C:/Studium/Semester7/SE/QuizApp/controller/controller.createfunction.php</file>
-            <file>file:/C:/Studium/Semester7/SE/QuizApp/controller/controller.createquestionpaint.php</file>
+            <file>file:/C:/Studium/Semester7/SE/QuizApp/controller/controller.createquestionmain.php</file>
         </group>
     </open-files>
 </project-private>
