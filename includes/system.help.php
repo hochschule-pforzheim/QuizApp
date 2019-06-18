@@ -365,7 +365,7 @@ $vars = $header['vars'];
 $primarykey = $vars[1];
 
 
-for ($i = 0; $i < 10; $i++) {
+for ($i = 0; $i < count($bindingsarray); $i++) {
     
  do { 
    
@@ -382,7 +382,7 @@ $firstletter = substr($primarykeyvalue,0,0);
  
   $i--; 
   
-$meinekat =8;
+
 $primarykeyvalueold = $primarykeyvalue;
 $j = 0;
 

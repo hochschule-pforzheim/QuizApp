@@ -5,28 +5,8 @@ $kat=filter_input(INPUT_GET,"katid");
 // Abfragen, welche Kategorie ausgewählt wurde und dementsprechend die richtige SQL-Abfrage aufrufen
 
 
-if($kat=="0"){
-//Kategorie IT      
-      
-}elseif ($kat=="1"){
-// Kategorie HS-Historie
-    $url ="" ;
-}elseif ($kat=="2"){
-// Kategorie Profs
-    $url ="" ;
-}elseif ($kat=="3"){
-// Kategorie Pforzheim
-    $url ="" ;
-}elseif ($kat=="4"){
-// Kategorie Kneipen
-    $url ="" ;
-}elseif ($kat=="5"){
-// Kategorie Mathematik
-    $url ="" ;
-}elseif ($kat=="6"){
-// Kategorie SPO
-    $url ="" ;
-}elseif ($kat=="7"){
+if($kat=="7")
+    {
 // Kategorie Sport  
     $url ="https://query.wikidata.org/sparql?format=json&query=%0A%23Liga%0ASELECT%20distinct%20%3Ffootballleague%20%3FfootballleagueLabel%20%3Fcountry%20%3FcountryLabel%20%20%3FleaguelevelbelowLabel%20%3FnumberofparticipantsLabel%20%3FseasonstartLabel%20where%20%7B%0A%20%20%3Ffootballleague%20wdt%3AP31%20wd%3AQ15991303%20.%0A%20%20%20%0A%20%20%20%3Ffootballleague%20wdt%3AP17%20%3Fcountry%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2500%20%3Fleaguelevelbelow%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP1132%20%3Fnumberofparticipants%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP4794%20%3Fseasonstart%3B%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ffootballleague%0A%0ALimit%20100%0A";
     $labels =array(
@@ -77,7 +57,7 @@ $fragestellung =[
     Help::questioncreator($url,$labels,8,$fragestellung);
     
 }elseif ($kat=="9"){
-// Kategorie Kunst
+// Kategorie Kunst und Kultur
          $url = "https://query.wikidata.org/sparql?format=json&query=%23Schauspieler%0A%0ASELECT%20%3Fhuman%20%3FhumanLabel%20%3Fbirthdate%20%3FbirthdateLabel%20%3Fgender%20%3FgenderLabel%20%3Ffilmography%20%3FfilmographyLabel%20%3Fcountryship%20%3FcountryshipLabel%20%3Fbirthplace%20%3FbirthplaceLabel%0AWHERE%20%7B%0A%0A%20%20%0A%20%20%3Fhuman%20wdt%3AP31%20wd%3AQ5%20%3B%20%0A%20%20%20%20%20%20%20%20%20wdt%3AP106%20wd%3AQ33999.%0A%0A%20%20%0A%3Fhuman%20wdt%3AP1283%20%3Ffilmography%20%3B%20%0Awdt%3AP21%20%3Fgender%20%3B%0Awdt%3AP27%20%3Fcountryship%20%3B%0Awdt%3AP19%20%3Fbirthplace%20%3B%0Awdt%3AP569%20%3Fbirthdate%20%3B%0AFILTER((%3Fbirthdate%20%3E%3D%20%221950-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20%26%26%20(%3Fbirthdate%20%3C%3D%20%222018-12-31T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime))%0A%20%20%20%20%20%20%20%0A%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3Fhuman%0ALIMIT%201000%0A";
 
 $labels =array(
@@ -94,125 +74,6 @@ $fragestellung =[
       
       
       Help::questioncreator($url,$labels,9,$fragestellung);
-    
-    
-    
-}elseif ($kat=="10"){
-// Kategorie Bio
-    
-
-         $url = "https://query.wikidata.org/#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
-
-$labels =array(
-    "countryshipLabel",
-    "birthplaceLabel",
-    "birthdateLabel");
-
-$fragestellung =[
-    0 => "Welche Nationalität gehört XXXXX an?",    
-    1 =>"Wann ist XXXXX geboren?",
-    2 =>"Wo ist XXXXX geboren?"
-    ];
-      
-      
-      
-      Help::questioncreator($url,$labels,9,$fragestellung);  
-    
-$url = "https://query.wikidata.org/#SELECT%20%3Fanimal%20%3FanimalLabel%20%3Ftaxonname%20%3Ffood%20%3FfoodLabel%20%3Fhabitat%20%3FhabitatLabel%20%3Fedemic%20%3FedemicLabel%20%7B%0A%20%20%3Fanimal%20wdt%3AP31%20wd%3AQ16521%20.%0A%20%20%3Fanimal%20wdt%3AP225%20%3Ftaxonname%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP1034%20%3Ffood%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP2974%20%3Fhabitat%3B%20%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP183%20%3Fedemic%3B%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fanimal%20%0ALimit%20100";
-
-$string = file_get_contents($url);
-$json_result = json_decode($string, true);
-$results = $json_result['results'];
-$bindingsarray = $results['bindings'];
-for ($i = 1; $i <= count($bindingsarray); $i++) {
-   
-   
-$bindings = $results['bindings'][$i] ; 
-$animalLabel = $bindings['animalLabel'];
-$animalname = $animalLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$taxonname = $bindings['taxonname'];
-$taxon = $taxonname['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$habitatLabel = $bindings['habitatLabel'];
-$habitat = $habitatLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$foodLabel = $bindings['foodLabel'];
-$food = $foodLabel['value'];
-
-$bindings = $results['bindings'][$i] ; 
-$edemicLabel = $bindings['edemicLabel'];
-$edemic = $edemicLabel['value'];
-
-
-$meinefrage ="Wie heißt die Überart von $animalname?";
-$meinekat =$kat;
-$meineAntwort =$taxon;
-$falscheAntwort ="";
-$falscheAntwortlabel ='animalLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Was fressen $animalname?";
-$meinekat =$kat;
-$meineAntwort =$food;
-$falscheAntwort ="";
-$falscheAntwortlabel ='foodLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Wo leben $animalname?";
-$meinekat =$kat;
-$meineAntwort =$edemic;
-$falscheAntwort ="";
-$falscheAntwortlabel ='edemicLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Wo fühlen sich $animalname am wohlsten?";
-$meinekat =$kat;
-$meineAntwort =$habitat;
-$falscheAntwort ="";
-$falscheAntwortlabel ='habitatLabel';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-$meinefrage ="Welches Tier lebt in $edemic?";
-$meinekat =$kat;
-$meineAntwort =$animalname;
-$falscheAntwort ="";
-$falscheAntwortlabel ='animalname';
-createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray);
-
-}
-
-}elseif ($kat=="11"){
-// Kategorie Architektur
-    
-    
-    
-    
-$url = "https://query.wikidata.org/sparql?format=json&query=%0A%23Sehensw%C3%BCrdigkeiten%0ASELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100";
-
-$labels =array(
-        "countryLabel",
-        "namedafterLabel",
-        "architectLabel",
-        "architectureLabel"
-        );
-
-$fragestellung =[
-            0 => "Wo liegt die Touristenattaktion: XXXXX?",    
-            1 =>"Nach was oder Wem wurde XXXXX benannt?",
-            2 =>"Wer war der Architect von XXXXX?",
-            3 =>"In welchen Architekturstil passt XXXXX?",
-            ];
-Help::questioncreator($url,$labels,11,$fragestellung); 
-    
-    
-    
-    
-}elseif ($kat=="12"){
-// Kategorie Kultur
     
 
         
@@ -247,10 +108,34 @@ Help::questioncreator($url,$labels,11,$fragestellung);
             ];
     Help::questioncreator($url,$labels,12,$fragestellung);
     
+        
     
+}elseif ($kat=="10"){
+// Kategorie Bio
     
 
-    
+         
+
+
+}elseif ($kat=="11"){
+// Kategorie Architektur
+      
+$url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20rdfs%3Alabel%20%3FtouristattractionLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FtouristattractionLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22b%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22c%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22d%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22f%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22g%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22h%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22j%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22k%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22l%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22m%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22n%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22o%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22p%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22s%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22t%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22v%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22w%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22z%22%20))%20)%20%20%20%20%20%20%20%20%20%0A%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100";
+
+$labels =array(
+        "countryLabel",
+        "namedafterLabel",
+        "architectLabel",
+        "architectureLabel"
+        );
+
+$fragestellung =[
+            0 => "Wo liegt die Touristenattaktion: XXXXX?",    
+            1 =>"Nach was oder Wem wurde XXXXX benannt?",
+            2 =>"Wer war der Architect von XXXXX?",
+            3 =>"In welchen Architekturstil passt XXXXX?",
+            ];
+Help::questioncreator($url,$labels,11,$fragestellung); 
     
     
 }elseif ($kat=="13"){
@@ -263,7 +148,8 @@ Help::questioncreator($url,$labels,11,$fragestellung);
     "https://query.wikidata.org/sparql?format=json&query=%23Literaturnobelpreis%0A%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ37922%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Prize%20in%20iterature%20(Q37922)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0AFILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0A%20%20%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen%0A%0A",
     "https://query.wikidata.org/sparql?format=json&query=%23Nobelpreis%20in%20Chemie%0A%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ44585%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Prize%20in%20Chemistry%20(Q44585)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0AFILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0A%20%20%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen%0A%0A",
     "https://query.wikidata.org/sparql?format=json&query=%23Nobelpreis%20in%20Physik%0A%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ38104%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Prize%20in%20Physics%20(Q38104)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0AFILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0A%20%20%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen%0A%0A",
-    "https://query.wikidata.org/sparql?format=json&query=%23Nobelpreis%20in%20Physiologie%20oder%20Medizin%20%0A%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ80061%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Prize%20in%20Physiologie%20or%20Medicine%20(Q80061)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0AFILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0A%20%20%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen%0A%0A"
+    "https://query.wikidata.org/sparql?format=json&query=%23Nobelpreis%20in%20Physiologie%20oder%20Medizin%20%0A%0ASELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ80061%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Prize%20in%20Physiologie%20or%20Medicine%20(Q80061)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0AFILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0A%20%20%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen%0A%0A",
+    "https://query.wikidata.org/sparql?format=json&query=SELECT%20DISTINCT%20%3Fitem%20%3FitemLabel%20%3Fwhen%20(YEAR(%3Fwhen)%20as%20%3Fdate)%20%3Fstadt%20%3FstadtLabel%20%3Fbirth%0AWHERE%20%7B%0A%20%20%0A%20%20%3Fitem%20p%3AP166%20%3FawardStat%20.%20%23%20%E2%80%A6%20with%20an%20awarded(P166)%20statement%0A%20%20%3FawardStat%20ps%3AP166%20wd%3AQ35637%20.%20%23%20%E2%80%A6%20that%20has%20the%20value%20Nobel%20Peace%20Prize%20(Q35637)%0A%20%20%3FawardStat%20pq%3AP585%20%3Fwhen%20%3B%20%23%20when%20did%20he%20receive%20the%20Nobel%20prize%0A%20%20%0A%20%20OPTIONAL%7B%20%3Fitem%20wdt%3AP19%20%3Fstadt%20%3B%20%0A%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%0A%20%3Fitem%20wdt%3AP569%20%3Fbirth%20.%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20FILTER%20(%3Fwhen%20%3E%3D%20%221980-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20.%0ASERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%0A%0A%7D%0A%0AORDER%20by%20%3Fwhen"
         );
     
     $preise =array(
@@ -271,6 +157,7 @@ Help::questioncreator($url,$labels,11,$fragestellung);
     "Chemienobelpreis",
     "Physiknobelpreis",
     "Physiologienobelpreis",
+    "Friedensnobelpreis",
 );
 
 
@@ -298,61 +185,5 @@ foreach ($urls as $url){
 }elseif ($kat=="15"){
 // Kategorie Politik
     $url ="" ;
-}
-    
-
-
-function createmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwort,$falscheAntwortlabel,$results,$bindingsarray) {
-
-$frage=new Frage;
-$frage->beschreibung = $meinefrage;
-$frage->Kategorie = $meinekat;
-$frage->antwortzeit = 10;
-$frage->create(); // gibt Im Idealfall eingegebene ID zurück, sonst 0/false
-
-
-$antwort=new Antwort;
-$antwort->Antworttext=$meineAntwort;
-$antwort->korrekt=1;
-$antwort->to_Frage = $frage->m_oid;  
-$antwort->create();
-
-do { 
- $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
- $erstA = $bindings[$falscheAntwortlabel];
-$erstA=$erstA['value']; 
- } 
- while (($erstA ==$meineAntwort) OR ($erstA ==""));
- 
- 
- do {
- $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
- $zweitA = $bindings[$falscheAntwortlabel];
- $zweitA =$zweitA ['value'];
-  } 
- while (($erstA ==$zweitA)OR ($zweitA==$meineAntwort)OR ($zweitA ==""));
- 
- do {
- $bindings = $results['bindings'][rand(0, count($bindingsarray))] ; 
- $drittA = $bindings[$falscheAntwortlabel];
- $drittA=$drittA['value'];
-
-} while (($drittA ==$zweitA)OR ($drittA==$meineAntwort)OR($drittA ==$erstA) OR ($drittA ==""));
-
-$falscheAntwort =[
-    0 => $erstA,
-     1 =>$zweitA,
-     2 =>$drittA];
-
-
-for ($i = 0; $i < 3; $i++) { 
-    
-
-$antwort->Antworttext=$falscheAntwort[$i];
-$antwort->korrekt=0;
-$antwort->to_Frage = $frage->m_oid;  
-$antwort->create();
-} 
-
 };
 

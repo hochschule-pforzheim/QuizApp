@@ -5,21 +5,21 @@
 SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
 WHERE {
   
-  ?item p:P166 ?awardStat . # … with an awarded(P166) statement
-  ?awardStat ps:P166 wd:Q35637 . # … that has the value Nobel Peace Prize (Q35637)
+  ?item p:P166 ?awardStat . # %E2%80%A6 with an awarded(P166) statement
+  ?awardStat ps:P166 wd:Q35637 . # %E2%80%A6 that has the value Nobel Peace Prize (Q35637)
   ?awardStat pq:P585 ?when ; # when did he receive the Nobel prize
   
   OPTIONAL{ ?item wdt:P19 ?stadt ; 
           }
   
-  OPTIONAL{ ?item wdt:P569 ?birth . 
-          }
+ ?item wdt:P569 ?birth . 
+          
   FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
 }
 
-ORDER by ?when
+ORDER by ?when"
 
 ##########################################################################################
 

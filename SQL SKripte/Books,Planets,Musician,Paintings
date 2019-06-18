@@ -79,7 +79,7 @@ SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creator ?creatorL
           wdt:P2049 ?weight ;   
           wdt:P195 ?collection .
        ?creator rdfs:label ?creatorLabel .
-    FILTER CONTAINS(?creatorLabel, "Max" )          
+    FILTER ((CONTAINS(?creatorLabel, "della")) || (CONTAINS(?creatorLabel,"Dal" ))|| (CONTAINS(?creatorLabel,"Monet" ))|| (CONTAINS(?creatorLabel,"Cassat" ))|| (CONTAINS(?creatorLabel,"Gogh" ))|| (CONTAINS(?creatorLabel,"recht" ))|| (CONTAINS(?creatorLabel,"da" )))          
 
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }

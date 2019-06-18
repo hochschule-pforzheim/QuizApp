@@ -1,5 +1,3 @@
-
-#Sehenswürdigkeiten
 SELECT distinct ?touristattraction ?touristattractionLabel ?country ?countryLabel ?namedafterLabel ?architectLabel ?architectureLabel where{
   ?touristattraction wdt:P31 wd:Q570116.
        
@@ -7,8 +5,10 @@ SELECT distinct ?touristattraction ?touristattractionLabel ?country ?countryLabe
              ?touristattraction wdt:P17 ?country;
                        wdt:P138 ?namedafter;
                        wdt:P84 ?architect;
-                       wdt:P149 ?architecture;
-                         
+                       wdt:P149 ?architecture.
+                       ?touristattraction rdfs:label ?touristattractionLabel .
+    FILTER ((CONTAINS(?touristattractionLabel, "a" ))||(CONTAINS(?touristattractionLabel, "b" ))||(CONTAINS(?touristattractionLabel, "c" ))||(CONTAINS(?touristattractionLabel, "d" ))||(CONTAINS(?touristattractionLabel, "e" ))||(CONTAINS(?touristattractionLabel, "f" ))||(CONTAINS(?touristattractionLabel, "g" ))||(CONTAINS(?touristattractionLabel, "h" ))||(CONTAINS(?touristattractionLabel, "i" ))||(CONTAINS(?touristattractionLabel, "j" ))||(CONTAINS(?touristattractionLabel, "k" ))||(CONTAINS(?touristattractionLabel, "l" ))||(CONTAINS(?touristattractionLabel, "m" ))||(CONTAINS(?touristattractionLabel, "n" ))||(CONTAINS(?touristattractionLabel, "o" ))||(CONTAINS(?touristattractionLabel, "p" ))||(CONTAINS(?touristattractionLabel, "s" ))||(CONTAINS(?touristattractionLabel, "t" ))||(CONTAINS(?touristattractionLabel, "u" ))||(CONTAINS(?touristattractionLabel, "v" ))||(CONTAINS(?touristattractionLabel, "w" ))||(CONTAINS(?touristattractionLabel, "z" )) )         
+  
           
   SERVICE wikibase:label {
     bd:serviceParam wikibase:language "de" .
