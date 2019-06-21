@@ -406,7 +406,7 @@ $falscheAntwortlabel =$value;
 
 $meineAntwort =$wert;
  $k++;
-Help::createsmyquestion($meinefrage, $meinekat, $meineAntwort, $falscheAntwortlabel,$results,$bindingsarray);
+Help::createsmyquestion($meinefrage, $meineKat, $meineAntwort, $falscheAntwortlabel,$results,$bindingsarray);
 }
   
 }
