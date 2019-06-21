@@ -8,7 +8,8 @@ SELECT distinct ?sportsteam ?sportsteamLabel ?countryLabel ?homevenueLabel ?leag
               wdt:P118 ?league;
               wdt:P286 ?headcoach;
              
-              
+              ?sportsteam rdfs:label ?sportsteamLabel .
+    FILTER ((CONTAINS(?sportsteamLabel, "a" ))||(CONTAINS(?sportsteamLabel, "e" ))||(CONTAINS(?sportsteamLabel, "i" ))||(CONTAINS(?sportsteamLabel, "u" ))||(CONTAINS(?sportsteamLabel, "o" )))
           
   SERVICE wikibase:label {
     bd:serviceParam wikibase:language "de" .
