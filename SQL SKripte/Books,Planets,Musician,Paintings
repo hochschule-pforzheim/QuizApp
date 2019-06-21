@@ -24,19 +24,37 @@ Limit 100
 
 # *******************************************************************************
 
+
 # Planeten
 
-SELECT ?objekt ?objektLabel ?planet ?planetLabel {
+# distance = Entfernung zu Erde
 
-	?objekt wdt:P31 wd:Q17444909 ;
-            wdt:P5869 ?planet .
+# period = siderische Periode (ZEit für 1 Umlauf auf Bahn
 
-	SERVICE wikibase:label {
-		bd:serviceParam wikibase:language "en" .       
-	}
+SELECT ?objekt ?objektLabel ?planet ?planetLabel ?mass ?distance ?period  {
+
+?objekt wdt:P31 wd:Q17444909 ;
+
+        wdt:P5869 ?planet .
+
+  ?planet wdt:P2067 ?mass ;
+
+        wdt:P2583 ?distance ;
+
+        wdt:P2146 ?period .
+
+SERVICE wikibase:label {
+
+bd:serviceParam wikibase:language "en" .
+
 }
+
+}
+
 Order BY ?objekt
+
 Limit 50
+
 
 # ******************************************************************************
 
