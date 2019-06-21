@@ -1,0 +1,15 @@
+
+#museum
+SELECT distinct ?museum ?museumLabel ?mainsubjectLabel ?countryLabel ?founderLabel where {
+  ?museum wdt:P31 wd:Q33506.
+  ?museum wdt:P921 ?mainsubject;
+          wdt:P17 ?country;
+          #wdt:P112 ?founder;
+  
+  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en" .
+
+  }
+} ORDER BY ?museum 
+Limit 100
