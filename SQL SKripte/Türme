@@ -1,0 +1,25 @@
+#tower
+SELECT distinct ?tower ?towerLabel ?heightLabel ?countryLabel 
+WHERE {
+  
+  {
+		SELECT ?country (MAX(?height) AS ?height)  WHERE {
+			  ?tower wdt:P31 wd:Q12518 .
+              ?tower wdt:P2048 ?height;
+          wdt:P17 ?country;
+		}
+		GROUP BY ?country
+		ORDER BY DESC(?height)}
+  
+  ?tower wdt:P31 wd:Q12518.
+  ?tower wdt:P2048 ?height;
+          wdt:P17 ?country;
+      
+  
+  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "en" .
+
+  }
+} ORDER BY ?tower 
+Limit 100
