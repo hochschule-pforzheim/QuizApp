@@ -49,6 +49,28 @@ $fragestellung =[
     
     
 }elseif ($kat=="8"){
+    
+    
+    
+    //Flüsse
+  
+    $url = "https://query.wikidata.org/sparql?format=json&query=%23L%C3%A4ngste%20Fl%C3%BCsse%20jedes%20Kontinents%0A%23added%20before%202016-10%0A%0ASELECT%20%3Friver%20%3FriverLabel%20%3Fcontinent%20%3FcontinentLabel%20%3Flength%0AWHERE%0A%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3Fcontinent%20(MAX(%3Flength)%20AS%20%3Flength)%0A%20%20%20%20WHERE%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%3Friver%20wdt%3AP31%2Fwdt%3AP279*%20wd%3AQ355304%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2043%20%3Flength%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP30%20%3Fcontinent.%0A%20%20%20%20%7D%0A%20%20%20%20GROUP%20BY%20%3Fcontinent%0A%20%20%7D%0A%20%20%3Friver%20wdt%3AP31%2Fwdt%3AP279*%20wd%3AQ355304%3B%0A%20%20%20%20%20%20%20%20%20wdt%3AP2043%20%3Flength%3B%0A%20%20%20%20%20%20%20%20%20wdt%3AP30%20%3Fcontinent.%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22.%20%7D%0A%7D%0AORDER%20BY%20%3FcontinentLabel";
+    
+$labels =array(
+    "length",
+    "continentLabel");
+
+$fragestellung =[
+    0 =>"Wie lang ist der Fluss XXXXX?",    
+    1 =>"Auf welchem Kontinent liegt der Fluss XXXXX?",
+    ];
+    Help::questioncreator($url,$labels,8,$fragestellung);
+    
+    
+    
+    
+    
+    //Städte
 
 $url = 'https://query.wikidata.org/sparql?format=json&query=SELECT%20DISTINCT%20%3Fcountry%20%3FcountryLabel%20%3Fcapital%20%3FcapitalLabel%20%3Fcountrypopulation%20%3Flanguage%20%3FlanguageLabel%20%3Fcurrency%20%24currencyLabel%20%3Fhighestpoint%20%3FhighestpointLabel%20%3Flowestpoint%20%3FlowestpointLabel%20%3Fheadofgoverment%20%3FheadofgovermentLabel%20%3Fformofgoverment%20%3FformofgovermentLabel%20%3FHDI%20%3Fscoollesschild%20%3Funemployment%0AWHERE%0A%7B%0A%20%20%3Fcountry%20wdt%3AP31%20wd%3AQ3624078%20.%0A%20%20%23not%20a%20former%20country%0A%20%20FILTER%20NOT%20EXISTS%20%7B%3Fcountry%20wdt%3AP31%20wd%3AQ3024240%7D%0A%20%20%23and%20no%20an%20ancient%20civilisation%20(needed%20to%20exclude%20ancient%20Egypt)%0A%20%20FILTER%20NOT%20EXISTS%20%7B%3Fcountry%20wdt%3AP31%20wd%3AQ28171280%7D%0A%3Fcountry%20wdt%3AP36%20%3Fcapital%3B%0Awdt%3AP1082%20%3Fcountrypopulation%20%3B%0Awdt%3AP37%20%3Flanguage%20%3B%0Awdt%3AP38%20%3Fcurrency%3B%0Awdt%3AP610%20%3Fhighestpoint%3B%0Awdt%3AP1589%20%3Flowestpoint%3B%0Awdt%3AP6%20%3Fheadofgoverment%3B%0Awdt%3AP122%20%3Fformofgoverment%3B%0A%23wdt%3AP1081%20%3FHDI%3B%0Awdt%3AP2573%20%3Fscoollesschild%3B%20%20%20%20%20%20%20%20%20%0Awdt%3AP1198%20%3Funemployment.%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%7D%0A%7D%0A%20%0AORDER%20BY%20%3FcountryLabel%0ALIMIT%20500000';
 
@@ -78,6 +100,30 @@ $fragestellung =[
     
 }elseif ($kat=="9"){
 // Kategorie Kunst und Kultur
+    
+    
+    
+        //Musiker
+      
+      $url = "https://query.wikidata.org/sparql?format=json&query=select%20distinct%20%3Fname%20%3FnameLabel%20%3FnameDescription%20%3FStadt%20%3FStadtLabel%20%3Fbirth%20where%20%7B%0A%20%20%20%20%3Fname%20wdt%3AP106%2Fwdt%3AP279*%20wd%3AQ639669%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP19%20%3FStadt%20%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP569%20%3Fbirth%20.%0A%20%20%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%2Cde%22%20%7D%0A%7D%0ALimit%2050";
+      
+      $labels =array(
+        "StadtLabel",
+        "birth",
+        );
+      
+    $fragestellung =[
+            0 => "Was ist der Geburtsort von XXXXX?",    
+            1 =>"Wann wurde XXXXX geboren?",
+            ];
+      
+    Help::questioncreator($url,$labels,9,$fragestellung); 
+    
+    
+    
+    
+    
+    
          $url = "https://query.wikidata.org/sparql?format=json&query=%23Schauspieler%0A%0ASELECT%20%3Fhuman%20%3FhumanLabel%20%3Fbirthdate%20%3FbirthdateLabel%20%3Fgender%20%3FgenderLabel%20%3Ffilmography%20%3FfilmographyLabel%20%3Fcountryship%20%3FcountryshipLabel%20%3Fbirthplace%20%3FbirthplaceLabel%0AWHERE%20%7B%0A%0A%20%20%0A%20%20%3Fhuman%20wdt%3AP31%20wd%3AQ5%20%3B%20%0A%20%20%20%20%20%20%20%20%20wdt%3AP106%20wd%3AQ33999.%0A%0A%20%20%0A%3Fhuman%20wdt%3AP1283%20%3Ffilmography%20%3B%20%0Awdt%3AP21%20%3Fgender%20%3B%0Awdt%3AP27%20%3Fcountryship%20%3B%0Awdt%3AP19%20%3Fbirthplace%20%3B%0Awdt%3AP569%20%3Fbirthdate%20%3B%0AFILTER((%3Fbirthdate%20%3E%3D%20%221950-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)%20%26%26%20(%3Fbirthdate%20%3C%3D%20%222018-12-31T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime))%0A%20%20%20%20%20%20%20%0A%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20%7D%0A%20%20%7D%0A%20%20%0AORDER%20BY%20%3Fhuman%0ALIMIT%201000%0A";
 
 $labels =array(
@@ -139,6 +185,25 @@ $fragestellung =[
 
 }elseif ($kat=="11"){
 // Kategorie Architektur
+    
+    
+    
+    
+        //Türme
+
+     $url = "https://query.wikidata.org/sparql?format=json&query=%23tower%0ASELECT%20distinct%20%3Ftower%20%3FtowerLabel%20%3FheightLabel%20%3FcountryLabel%20%0AWHERE%20%7B%0A%0A%20%20%7B%0A%09%09SELECT%20%3Fcountry%20(MAX(%3Fheight)%20AS%20%3Fheight)%20%20WHERE%20%7B%0A%09%09%09%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry%3B%0A%09%09%7D%0A%09%09GROUP%20BY%20%3Fcountry%0A%09%09ORDER%20BY%20DESC(%3Fheight)%7D%0A%0A%20%20%3Ftower%20wdt%3AP31%20wd%3AQ12518.%0A%20%20%3Ftower%20wdt%3AP2048%20%3Fheight%3B%0A%20%20%20%20%20%20%20%20%20%20wdt%3AP17%20%3Fcountry.%0A%0A%20%20%20%20%20%20%20%3Ftower%20rdfs%3Alabel%20%3FtowerLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FtowerLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FtowerLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FtowerLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FtowerLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FtowerLabel%2C%20%22o%22%20)))%0A%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftower%20%0ALimit%20100";
+      
+      $labels =array(
+        "countryLabel",
+        "heightLabel",
+        );
+    $fragestellung =[
+            0 => "Wo liegt der Turm XXXXX?",    
+            1 =>"Wie hoch ist der Turm XXXXX?",
+            ];
+    
+Help::questioncreator($url,$labels,11,$fragestellung);
+    
       
 $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20distinct%20%3Ftouristattraction%20%3FtouristattractionLabel%20%3Fcountry%20%3FcountryLabel%20%3FnamedafterLabel%20%3FarchitectLabel%20%3FarchitectureLabel%20where%7B%0A%20%20%3Ftouristattraction%20wdt%3AP31%20wd%3AQ570116.%0A%20%20%20%20%20%20%20%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20wdt%3AP17%20%3Fcountry%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP138%20%3Fnamedafter%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP84%20%3Farchitect%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP149%20%3Farchitecture.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ftouristattraction%20rdfs%3Alabel%20%3FtouristattractionLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FtouristattractionLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22b%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22c%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22d%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22f%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22g%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22h%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22j%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22k%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22l%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22m%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22n%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22o%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22p%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22s%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22t%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22v%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22w%22%20))%7C%7C(CONTAINS(%3FtouristattractionLabel%2C%20%22z%22%20))%20)%20%20%20%20%20%20%20%20%20%0A%20%20%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ftouristattraction%0ALimit%20100";
 
