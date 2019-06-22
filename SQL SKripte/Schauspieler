@@ -13,6 +13,8 @@ wdt:P19 ?birthplace ;
 wdt:P569 ?birthdate ;
 FILTER((?birthdate >= "1950-01-01T00:00:00Z"^^xsd:dateTime) && (?birthdate <= "2018-12-31T00:00:00Z"^^xsd:dateTime))
        
+?human rdfs:label ?humanLabel .
+	    FILTER ((CONTAINS(?humanLabel, "a" ))||(CONTAINS(?humanLabel, "e" ))||(CONTAINS(?humanLabel, "i" ))||(CONTAINS(?humanLabel, "u" ))||(CONTAINS(?humanLabel, "o" )))
 
 
 SERVICE wikibase:label {
