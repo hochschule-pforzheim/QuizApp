@@ -16,6 +16,11 @@ WHERE
 	OPTIONAL {
 		?book wdt:P577 ?publicationDate .
 	}
+	
+	?book rdfs:label ?bookLabel .
+	    FILTER ((CONTAINS(?bookLabel, "a" ))||(CONTAINS(?bookLabel, "e" ))||(CONTAINS(?bookLabel, "i" ))||(CONTAINS(?bookLabel, "u" ))||(CONTAINS(?bookLabel, "o" )))
+
+	
 	SERVICE wikibase:label {
 		bd:serviceParam wikibase:language "en" .
 	}
@@ -42,6 +47,10 @@ SELECT ?objekt ?objektLabel ?planet ?planetLabel ?mass ?distance ?period  {
         wdt:P2583 ?distance ;
 
         wdt:P2146 ?period .
+	
+?planet rdfs:label ?planetLabel .
+ FILTER ((CONTAINS(?planetLabel, "a" ))||(CONTAINS(?planetLabel, "e" ))||(CONTAINS(?planetLabel, "i" ))||(CONTAINS(?planetLabel, "u" ))||(CONTAINS(?planetLabel, "o" )))
+
 
 SERVICE wikibase:label {
 
@@ -76,6 +85,10 @@ SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creatorLabel ?col
     ?painting wdt:P31 wd:Q3305213 ; 
           wdt:P170 ?creator ; 
           wdt:P195 ?collection . 
+	  
+	  ?painting rdfs:label ?paintingLabel .
+	    FILTER ((CONTAINS(?paintingLabel, "a" ))||(CONTAINS(?paintingLabel, "e" ))||(CONTAINS(?paintingLabel, "i" ))||(CONTAINS(?paintingLabel, "u" ))||(CONTAINS(?paintingLabel, "o" )))
+
   
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]" }
 }
@@ -98,6 +111,10 @@ SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creator ?creatorL
           wdt:P195 ?collection .
        ?creator rdfs:label ?creatorLabel .
     FILTER ((CONTAINS(?creatorLabel, "della")) || (CONTAINS(?creatorLabel,"Dal" ))|| (CONTAINS(?creatorLabel,"Monet" ))|| (CONTAINS(?creatorLabel,"Cassat" ))|| (CONTAINS(?creatorLabel,"Gogh" ))|| (CONTAINS(?creatorLabel,"recht" ))|| (CONTAINS(?creatorLabel,"da" )))          
+
+?painting rdfs:label ?paintingLabel .
+FILTER ((CONTAINS(?paintingLabel, "a" ))||(CONTAINS(?paintingLabel, "e" ))||(CONTAINS(?paintingLabel, "i" ))||(CONTAINS(?paintingLabel, "u" ))||(CONTAINS(?paintingLabel, "o" )))
+
 
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }
 }
