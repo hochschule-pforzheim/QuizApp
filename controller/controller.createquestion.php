@@ -270,5 +270,39 @@ foreach ($urls as $url){
 }elseif ($kat=="15"){
 // Kategorie Politik
     $url ="" ;
-};
+}elseif ($kat=="16"){
+// Kategorie Astronomie
+          $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fobjekt%20%3FobjektLabel%20%3Fplanet%20%3FplanetLabel%20%3Fmass%20%3Fdistance%20%3Fperiod%20%20%7B%0A%3Fobjekt%20wdt%3AP31%20wd%3AQ17444909%20%3B%0A%20%20%20%20%20%20%20%20wdt%3AP5869%20%3Fplanet%20.%0A%20%20%3Fplanet%20wdt%3AP2067%20%3Fmass%20%3B%0A%20%20%20%20%20%20%20%20wdt%3AP2583%20%3Fdistance%20%3B%0A%20%20%20%20%20%20%20%20wdt%3AP2146%20%3Fperiod%20.%0ASERVICE%20wikibase%3Alabel%20%7B%0Abd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%7D%0A%7D%0AOrder%20BY%20%3Fobjekt%0A";
+              
+$labels =array(
+    "mass",
+    "distance",
+    "period",
+    );
+$fragestellung =[
+    0 => "Was ist die Masse des Planeten XXXXX?",    
+    1 =>"Wie weit ist der Planet XXXXX von der Erde entfernt?",
+    2=>"Wie lange ist eine sideriche Periode bei XXXXX?",  
+    ];
+    Help::questioncreator($url,$labels,16,$fragestellung);
+    
+}elseif ($kat=="17"){
+// Kategorie Literatur
+    $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fbook%20%3FbookLabel%20%3FauthorLabel%20%3Fgenre_label%20%3Fseries_label%20%3FpublicationDate%0AWHERE%0A%7B%0A%09%3Fbook%20wdt%3AP31%20wd%3AQ571%20.%0A%09%3Fbook%20wdt%3AP50%20%3Fauthor%20.%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP136%20%3Fgenre%20.%0A%09%09%3Fgenre%20rdfs%3Alabel%20%3Fgenre_label%20filter%20(lang(%3Fgenre_label)%20%3D%20%22en%22).%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP179%20%3Fseries%20.%0A%09%09%3Fseries%20rdfs%3Alabel%20%3Fseries_label%20filter%20(lang(%3Fseries_label)%20%3D%20%22en%22).%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP577%20%3FpublicationDate%20.%0A%09%7D%0A%09SERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%09%7D%0A%7D%0ALimit%20100%0A";
+      
+$labels =array(
+    "authorLabel",
+    "genreLabel",
+    "seriesLabel",
+    "publicationDateLabel",
+    );
+$fragestellung =[
+    0 => "Wer ist Autor des Buches XXXXX?",    
+    1 =>"Zu welchem Genre gehört das Buch XXXXX?",
+    2 =>"Zu welcher Buchreihe gehört das Buch XXXXX ?",
+    3 =>"Wann ist das Buch XXXXX erschienen?",  
+    ];
+      Help::questioncreator($url,$labels,17,$fragestellung);
+}
+Core::addError("Die Fragen wurden angelegt.");
 
