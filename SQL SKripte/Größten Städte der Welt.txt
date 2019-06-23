@@ -12,6 +12,11 @@ SELECT DISTINCT ?city ?cityLabel ?population ?country ?countryLabel ?loc WHERE {
 	?city wdt:P1082 ?population .
 	?city wdt:P17 ?country .
 	?city wdt:P625 ?loc .
+	
+	?city rdfs:label ?cityLabel .
+	    FILTER ((CONTAINS(?cityLabel, "a" ))||(CONTAINS(?cityLabel, "e" ))||(CONTAINS(?cityLabel, "i" ))||(CONTAINS(?cityLabel, "u" ))||(CONTAINS(?cityLabel, "o" )))
+
+	
 	SERVICE wikibase:label {
 		bd:serviceParam wikibase:language "de" .
 	}
