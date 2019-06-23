@@ -5,6 +5,10 @@ SELECT ?animal ?animalLabel ?taxonname ?food ?foodLabel ?habitat ?habitatLabel ?
           wdt:P1034 ?food;
           wdt:P2974 ?habitat; 
           wdt:P183 ?edemic;
+          
+          ?animal rdfs:label ?animalLabel .
+    FILTER ((CONTAINS(?animalLabel, "a" ))||(CONTAINS(?animalLabel, "e" ))||(CONTAINS(?animalLabel, "i" ))||(CONTAINS(?animalLabel, "u" ))||(CONTAINS(?animalLabel, "o" )))
+          
   SERVICE wikibase:label {
     bd:serviceParam wikibase:language "en" .
 
