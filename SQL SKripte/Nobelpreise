@@ -15,6 +15,11 @@ WHERE {
  ?item wdt:P569 ?birth . 
           
   FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
+  
+  ?item rdfs:label ?itemLabel .
+	FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+
+  
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
 }
@@ -38,6 +43,10 @@ WHERE {
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
+
+?item rdfs:label ?itemLabel .
+FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -62,6 +71,10 @@ WHERE {
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
+
+?item rdfs:label ?itemLabel .
+FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -86,6 +99,10 @@ WHERE {
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
+
+?item rdfs:label ?itemLabel .
+FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
@@ -110,6 +127,10 @@ WHERE {
   OPTIONAL{ ?item wdt:P569 ?birth . 
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
+
+?item rdfs:label ?itemLabel .
+FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
