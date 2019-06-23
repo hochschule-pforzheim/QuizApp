@@ -17,6 +17,10 @@ WHERE
 	
   FILTER (?publicationDate >= "2000-00-00T00:00:00Z"^^xsd:dateTime)
   
+  ?film rdfs:label ?filmLabel .
+	    FILTER ((CONTAINS(?filmLabel, "a" ))||(CONTAINS(?filmLabel, "e" ))||(CONTAINS(?filmLabel, "i" ))||(CONTAINS(?filmLabel, "u" ))||(CONTAINS(?filmLabel, "o" )))
+
+  
 	SERVICE wikibase:label {
 		bd:serviceParam wikibase:language "en" .
 	}
