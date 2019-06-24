@@ -17,9 +17,6 @@ WHERE
 		?book wdt:P577 ?publicationDate .
 	}
 	
-	?book rdfs:label ?bookLabel .
-	    FILTER ((CONTAINS(?bookLabel, "a" ))||(CONTAINS(?bookLabel, "e" ))||(CONTAINS(?bookLabel, "i" ))||(CONTAINS(?bookLabel, "u" ))||(CONTAINS(?bookLabel, "o" )))
-
 	
 	SERVICE wikibase:label {
 		bd:serviceParam wikibase:language "en" .
@@ -48,8 +45,6 @@ SELECT ?objekt ?objektLabel ?planet ?planetLabel ?mass ?distance ?period  {
 
         wdt:P2146 ?period .
 	
-?planet rdfs:label ?planetLabel .
- FILTER ((CONTAINS(?planetLabel, "a" ))||(CONTAINS(?planetLabel, "e" ))||(CONTAINS(?planetLabel, "i" ))||(CONTAINS(?planetLabel, "u" ))||(CONTAINS(?planetLabel, "o" )))
 
 
 SERVICE wikibase:label {
@@ -69,7 +64,7 @@ Limit 50
 
 #Musician
 
-select distinct ?name ?nameLabel ?nameDescription ?Stadt ?StadtLabel ?birth where {
+select distinct ?name ?nameLabel ?nameDescription ?Stadt ?StadtLabel ?birth(YEAR(?birth) as ?date) where {
     ?name wdt:P106/wdt:P279* wd:Q639669 ;
           wdt:P19 ?Stadt ;
           wdt:P569 ?birth .
