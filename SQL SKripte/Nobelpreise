@@ -2,7 +2,7 @@
 
 #Friedensnobelpreis
 
-SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
+SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth (YEAR(?birth) as ?birthdate)
 WHERE {
   
   ?item p:P166 ?awardStat . # %E2%80%A6 with an awarded(P166) statement
@@ -16,21 +16,20 @@ WHERE {
           
   FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
   
-  ?item rdfs:label ?itemLabel .
-	FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
+  
 
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
 
 }
 
-ORDER by ?when"
+ORDER by ?when
 
 ##########################################################################################
 
 #Literaturnobelpreis
 
-SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
+SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth (YEAR(?birth) as ?birthdate)
 WHERE {
   
   ?item p:P166 ?awardStat . # … with an awarded(P166) statement
@@ -44,8 +43,6 @@ WHERE {
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 
-?item rdfs:label ?itemLabel .
-FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
 
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
@@ -58,7 +55,7 @@ ORDER by ?when
 
 #Nobelpreis in Chemie
 
-SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
+SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth (YEAR(?birth) as ?birthdate)
 WHERE {
   
   ?item p:P166 ?awardStat . # … with an awarded(P166) statement
@@ -72,8 +69,6 @@ WHERE {
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 
-?item rdfs:label ?itemLabel .
-FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
 
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
@@ -86,7 +81,7 @@ ORDER by ?when
 
 #Nobelpreis in Physik
 
-SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
+SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth (YEAR(?birth) as ?birthdate)
 WHERE {
   
   ?item p:P166 ?awardStat . # … with an awarded(P166) statement
@@ -100,8 +95,6 @@ WHERE {
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 
-?item rdfs:label ?itemLabel .
-FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
 
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
@@ -114,7 +107,7 @@ ORDER by ?when
 
 #Nobelpreis in Physiologie oder Medizin 
 
-SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth
+SELECT DISTINCT ?item ?itemLabel ?when (YEAR(?when) as ?date) ?stadt ?stadtLabel ?birth (YEAR(?birth) as ?birthdate)
 WHERE {
   
   ?item p:P166 ?awardStat . # … with an awarded(P166) statement
@@ -128,8 +121,6 @@ WHERE {
           }
 FILTER (?when >= "1980-01-01T00:00:00Z"^^xsd:dateTime) .
 
-?item rdfs:label ?itemLabel .
-FILTER ((CONTAINS(?itemLabel, "a" ))||(CONTAINS(?itemLabel, "e" ))||(CONTAINS(?itemLabel, "i" ))||(CONTAINS(?itemLabel, "u" ))||(CONTAINS(?itemLabel, "o" )))
 
   
 SERVICE wikibase:label { bd:serviceParam wikibase:language "en" . }
