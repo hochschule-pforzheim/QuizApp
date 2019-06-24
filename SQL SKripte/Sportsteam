@@ -6,7 +6,7 @@ SELECT distinct ?sportsteam ?sportsteamLabel ?countryLabel ?homevenueLabel ?leag
   ?sportsteam wdt:P17 ?country;
               wdt:P115 ?homevenue;
               wdt:P118 ?league;
-              wdt:P286 ?headcoach;
+              wdt:P286 ?headcoach.
              
            ?sportsteam rdfs:label ?sportsteamLabel .
 	    FILTER ((CONTAINS(?sportsteamLabel, "a" ))||(CONTAINS(?sportsteamLabel, "e" ))||(CONTAINS(?sportsteamLabel, "i" ))||(CONTAINS(?sportsteamLabel, "u" ))||(CONTAINS(?sportsteamLabel, "o" )))
