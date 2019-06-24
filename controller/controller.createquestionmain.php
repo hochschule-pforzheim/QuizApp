@@ -1,6 +1,6 @@
 <?php
 
-
+Core::checkAccessLevel(2);
 $kategorie=new KategorieT();
 $kategorieliste=$kategorie->findAll();
 
