@@ -112,8 +112,6 @@ SELECT DISTINCT ?painting ?paintingLabel ?paintingDescription ?creator ?creatorL
        ?creator rdfs:label ?creatorLabel .
     FILTER ((CONTAINS(?creatorLabel, "della")) || (CONTAINS(?creatorLabel,"Dal" ))|| (CONTAINS(?creatorLabel,"Monet" ))|| (CONTAINS(?creatorLabel,"Cassat" ))|| (CONTAINS(?creatorLabel,"Gogh" ))|| (CONTAINS(?creatorLabel,"recht" ))|| (CONTAINS(?creatorLabel,"da" )))          
 
-?painting rdfs:label ?paintingLabel .
-FILTER ((CONTAINS(?paintingLabel, "a" ))||(CONTAINS(?paintingLabel, "e" ))||(CONTAINS(?paintingLabel, "i" ))||(CONTAINS(?paintingLabel, "u" ))||(CONTAINS(?paintingLabel, "o" )))
 
 
     SERVICE wikibase:label { bd:serviceParam wikibase:language "en" }

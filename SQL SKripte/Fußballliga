@@ -6,13 +6,13 @@ SELECT distinct ?footballleague ?footballleagueLabel ?country ?countryLabel ?lea
    ?footballleague wdt:P17 ?country;                   
                    wdt:P2500 ?leaguelevelbelow;
                    wdt:P1132 ?numberofparticipants;
-                   wdt:P4794 ?seasonstart;
+                   wdt:P4794 ?seasonstart.
                    
                    ?footballleague rdfs:label ?footballleagueLabel .
     FILTER ((CONTAINS(?footballleagueLabel, "a" ))||(CONTAINS(?footballleagueLabel, "e" ))||(CONTAINS(?footballleagueLabel, "i" ))||(CONTAINS(?footballleagueLabel, "u" ))||(CONTAINS(?footballleagueLabel, "o" )))
           
   SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "en" .
+    bd:serviceParam wikibase:language "de" .
 
   }
 } ORDER BY ?footballleague

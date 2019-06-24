@@ -8,7 +8,7 @@ $kat=filter_input(INPUT_GET,"katid");
 if($kat=="7")
     {
 // Kategorie Sport  
-    $url ="https://query.wikidata.org/sparql?format=json&query=%0A%23Liga%0ASELECT%20distinct%20%3Ffootballleague%20%3FfootballleagueLabel%20%3Fcountry%20%3FcountryLabel%20%20%3FleaguelevelbelowLabel%20%3FnumberofparticipantsLabel%20%3FseasonstartLabel%20where%20%7B%0A%20%20%3Ffootballleague%20wdt%3AP31%20wd%3AQ15991303%20.%0A%20%20%20%0A%20%20%20%3Ffootballleague%20wdt%3AP17%20%3Fcountry%3B%0A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2500%20%3Fleaguelevelbelow%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP1132%20%3Fnumberofparticipants%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP4794%20%3Fseasonstart%3B%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ffootballleague%0A%0ALimit%20100%0A";
+    $url ="https://query.wikidata.org/sparql?format=json&query=%0A%23Liga%0ASELECT%20distinct%20%3Ffootballleague%20%3FfootballleagueLabel%20%3Fcountry%20%3FcountryLabel%20%3FleaguelevelbelowLabel%20%3FnumberofparticipantsLabel%20%3FseasonstartLabel%20where%20%7B%0A%20%20%3Ffootballleague%20wdt%3AP31%20wd%3AQ15991303%20.%0A%20%20%20%0A%20%20%20%3Ffootballleague%20wdt%3AP17%20%3Fcountry%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2500%20%3Fleaguelevelbelow%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP1132%20%3Fnumberofparticipants%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP4794%20%3Fseasonstart.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Ffootballleague%20rdfs%3Alabel%20%3FfootballleagueLabel%20.%0A%20%20%20%20FILTER%20((CONTAINS(%3FfootballleagueLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FfootballleagueLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FfootballleagueLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FfootballleagueLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FfootballleagueLabel%2C%20%22o%22%20)))%0A%20%20%20%20%20%20%20%20%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Ffootballleague%0A%0ALimit%20100";
     $labels =array(
     "countryLabel",
     "leaguelevelbelowLabel",
@@ -22,7 +22,7 @@ $fragestellung =[
     2 =>"Wann beginnt die XXXXX?",
     3 =>"Wie viele Teilnehemer hat die Liga: XXXXX?"
     ];
-      
+    
       
       
       Help::questioncreator($url,$labels,7,$fragestellung);
@@ -38,7 +38,7 @@ $fragestellung =[
       
     $fragestellung =[
         0 => "In welchem Land spielt XXXXX?",    
-        1 =>"Wie heisst das Heimstadion von XXXXX?",
+        1 =>"Wie heißt das Heimstadion von XXXXX?",
         2 =>"In welcher Liga spielt XXXXX?",
         3 =>"Wer ist der Trainer von XXXXX?"
         ];
