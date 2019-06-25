@@ -172,11 +172,6 @@ $fragestellung =[
     Core::addError("Die Fragen wurden angelegt.");
         
     
-}elseif ($kat=="10"){
-// Kategorie Bio
-    
-Core::addError("Für diese Kategorie können keine Fragen generiert werden.");
-
 }elseif ($kat=="11"){
 // Kategorie Architektur
     
@@ -217,23 +212,7 @@ $fragestellung =[
 Help::questioncreator($url,$labels,11,$fragestellung); 
     Core::addError("Die Fragen wurden angelegt.");
     
-}elseif ($kat=="13"){
-// Kategorie Wirtschaft
-$url ="https://query.wikidata.org/sparql?format=json&query=%23Partei%0ASELECT%20distinct%20%3Fpolitical_party%20%3Fpolitical_partyLabel%20%3FcountryLabel%20%3Fheadquarters_locationLabel%20%3Fmember_countLabel%20%3FchairpersonLabel%20where%20%7B%0A%20%20%3Fpolitical_party%20wdt%3AP31%20wd%3AQ7278%20.%0A%20%20%20%0A%20%20%20%20%3Fpolitical_party%20wdt%3AP17%20%3Fcountry%20%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP159%20%3Fheadquarters_location%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2124%20%3Fmember_count%20.%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20OPTIONAL%20%7B%20%3Fpolitical_party%20wdt%3AP488%20%3Fchairperson%20.%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Fchairperson%20rdfs%3Alabel%20%3FchairpersonLabel%20filter%20(lang(%3FchairpersonLabel)%20%3D%20%22en%22).%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Fpolitical_party%20rdfs%3Alabel%20%3Fpolitical_partyLabel%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20FILTER%20((CONTAINS(%3Fpolitical_partyLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22o%22%20)))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fpolitical_party%0A%0ALimit%20100" ;
-    $labels =array(
-    "countryLabel",
-    "headquarters_locationLabel",
-    "member_countLabel",
-    "chairpersonLabel" ,   
-    );
-$fragestellung =[
-    0 => "Zu welchem Land gehört die Partei XXXXX?",    
-    1 =>"Wo befindet sich der Hauptsitz der Partei XXXXX?",
-    2=>"Wie viele Mitglieder hat die Partei XXXXX?",
-    3=>"Wer ist der Vorsitzende der Partei XXXXX?",
-    ];
-    Help::questioncreator($url,$labels,15,$fragestellung);
-    Core::addError("Die Fragen wurden angelegt.");
+
 }elseif ($kat=="14"){
 // Kategorie Wissenschaft
     
