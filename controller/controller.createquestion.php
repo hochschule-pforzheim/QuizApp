@@ -296,7 +296,7 @@ $fragestellung =[
     
 }elseif ($kat=="16"){
 // Kategorie Astronomie
-          $url = "https://query.wikidata.org/sparql?format=json&query=%23%20Planeten%0A%0A%23%20distance%20%3D%20Entfernung%20zu%20Erde%0A%0A%23%20period%20%3D%20siderische%20Periode%20(ZEit%20f%C3%BCr%201%20Umlauf%20auf%20Bahn%0A%0ASELECT%20%3Fobjekt%20%3FobjektLabel%20%3Fplanet%20%3FplanetLabel%20%3Fmass%20%3Fdistance%20%3Fperiod%20%20%7B%0A%0A%3Fobjekt%20wdt%3AP31%20wd%3AQ17444909%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP5869%20%3Fplanet%20.%0A%0A%20%20%3Fplanet%20wdt%3AP2067%20%3Fmass%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2583%20%3Fdistance%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2146%20%3Fperiod%20.%0A%09%0A%0A%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%0Abd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%7D%0A%0A%7D%0A%0AOrder%20BY%20%3Fobjekt%0A%0ALimit%2050";
+          $url = "https://query.wikidata.org/sparql?format=json&query=%23%20Planeten%0A%0A%23%20distance%20%3D%20Entfernung%20zu%20Erde%0A%0A%23%20period%20%3D%20siderische%20Periode%20(ZEit%20f%C3%BCr%201%20Umlauf%20auf%20Bahn%0A%0ASELECT%20%3Fplanet%20%3FplanetLabel%20%3Fmass%20%3Fdistance%20%3Fperiod%20%20%7B%0A%0A%3Fobjekt%20wdt%3AP31%20wd%3AQ17444909%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP5869%20%3Fplanet%20.%0A%0A%20%20%3Fplanet%20wdt%3AP2067%20%3Fmass%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2583%20%3Fdistance%20%3B%0A%0A%20%20%20%20%20%20%20%20wdt%3AP2146%20%3Fperiod%20.%0A%09%0A%0A%0ASERVICE%20wikibase%3Alabel%20%7B%0A%0Abd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%0A%7D%0A%0A%7D%0A%0AOrder%20BY%20%3Fobjekt%0A%0ALimit%2050%0A";
               
 $labels =array(
     "mass",
