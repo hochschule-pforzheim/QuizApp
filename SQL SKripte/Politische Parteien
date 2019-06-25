@@ -1,0 +1,24 @@
+#Partei
+SELECT distinct ?political_partyLabel ?countryLabel ?headquarters_locationLabel ?member_countLabel ?chairpersonLabel where {
+  ?political_party wdt:P31 wd:Q7278 .
+   
+    ?political_party wdt:P17 ?country ;                   
+                     wdt:P159 ?headquarters_location;
+                     wdt:P2124 ?member_count . 
+                  
+                   OPTIONAL { ?political_party wdt:P488 ?chairperson . 
+                              ?chairperson rdfs:label ?chairpersonLabel filter (lang(?chairpersonLabel) = "en").
+	                        }
+                  
+                   ?political_party rdfs:label ?political_partyLabel .
+                   FILTER ((CONTAINS(?political_partyLabel, "a" ))||(CONTAINS(?political_partyLabel, "e" ))||(CONTAINS(?political_partyLabel, "i" ))||(CONTAINS(?political_partyLabel, "u" ))||(CONTAINS(?political_partyLabel, "o" )))
+                   
+ 
+  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "de" .
+
+  }
+} ORDER BY ?political_party
+
+Limit 100
