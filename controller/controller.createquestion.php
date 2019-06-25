@@ -219,8 +219,21 @@ Help::questioncreator($url,$labels,11,$fragestellung);
     
 }elseif ($kat=="13"){
 // Kategorie Wirtschaft
-    $url ="" ;
-    Core::addError("Für diese Kategorie können keine Fragen generiert werden.");
+$url ="https://query.wikidata.org/sparql?format=json&query=%23Partei%0ASELECT%20distinct%20%3Fpolitical_party%20%3Fpolitical_partyLabel%20%3FcountryLabel%20%3Fheadquarters_locationLabel%20%3Fmember_countLabel%20%3FchairpersonLabel%20where%20%7B%0A%20%20%3Fpolitical_party%20wdt%3AP31%20wd%3AQ7278%20.%0A%20%20%20%0A%20%20%20%20%3Fpolitical_party%20wdt%3AP17%20%3Fcountry%20%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP159%20%3Fheadquarters_location%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP2124%20%3Fmember_count%20.%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20OPTIONAL%20%7B%20%3Fpolitical_party%20wdt%3AP488%20%3Fchairperson%20.%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Fchairperson%20rdfs%3Alabel%20%3FchairpersonLabel%20filter%20(lang(%3FchairpersonLabel)%20%3D%20%22en%22).%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Fpolitical_party%20rdfs%3Alabel%20%3Fpolitical_partyLabel%20.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20FILTER%20((CONTAINS(%3Fpolitical_partyLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3Fpolitical_partyLabel%2C%20%22o%22%20)))%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%0A%20%20%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%0A%20%20%20%20bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%0A%20%20%7D%0A%7D%20ORDER%20BY%20%3Fpolitical_party%0A%0ALimit%20100" ;
+    $labels =array(
+    "countryLabel",
+    "headquarters_locationLabel",
+    "member_countLabel",
+    "chairpersonLabel" ,   
+    );
+$fragestellung =[
+    0 => "Zu welchem Land gehört die Partei XXXXX?",    
+    1 =>"Wo befindet sich der Hauptsitz der Partei XXXXX?",
+    2=>"Wie viele Mitglieder hat die Partei XXXXX?",
+    3=>"Wer ist der Vorsitzende der Partei XXXXX?",
+    ];
+    Help::questioncreator($url,$labels,15,$fragestellung);
+    Core::addError("Die Fragen wurden angelegt.");
 }elseif ($kat=="14"){
 // Kategorie Wissenschaft
     
@@ -288,20 +301,16 @@ $fragestellung =[
     
 }elseif ($kat=="17"){
 // Kategorie Literatur
-    $url = "https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fbook%20%3FbookLabel%20%3FauthorLabel%20%3Fgenre_label%20%3Fseries_label%20%3FpublicationDate%0AWHERE%0A%7B%0A%09%3Fbook%20wdt%3AP31%20wd%3AQ571%20.%0A%09%3Fbook%20wdt%3AP50%20%3Fauthor%20.%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP136%20%3Fgenre%20.%0A%09%09%3Fgenre%20rdfs%3Alabel%20%3Fgenre_label%20filter%20(lang(%3Fgenre_label)%20%3D%20%22en%22).%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP179%20%3Fseries%20.%0A%09%09%3Fseries%20rdfs%3Alabel%20%3Fseries_label%20filter%20(lang(%3Fseries_label)%20%3D%20%22en%22).%0A%09%7D%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP577%20%3FpublicationDate%20.%0A%09%7D%0A%09SERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%0A%09%7D%0A%7D%0ALimit%20100%0A";
+    $url = "https://query.wikidata.org/sparql?format=json&query=%23%20B%C3%BCcher%0A%0ASELECT%20%3Fbook%20%3FbookLabel%20%3FauthorLabel%20%20%20(YEAR(%3FpublicationDate)%20as%20%3Fdate)%20%23%3Fgenre_label%20%3Fseries_label%0AWHERE%0A%7B%0A%09%3Fbook%20wdt%3AP31%20wd%3AQ571%20.%0A%09%3Fbook%20wdt%3AP50%20%3Fauthor%20%3B%0A%09%0A%09OPTIONAL%20%7B%0A%09%09%3Fbook%20wdt%3AP577%20%3FpublicationDate%20.%0A%09%7D%0A%20%20%3Fbook%20rdfs%3Alabel%20%3FbookLabel%20.%0AFILTER((CONTAINS(%3FbookLabel%2C%20%22a%22%20))%7C%7C(CONTAINS(%3FbookLabel%2C%20%22e%22%20))%7C%7C(CONTAINS(%3FbookLabel%2C%20%22i%22%20))%7C%7C(CONTAINS(%3FbookLabel%2C%20%22u%22%20))%7C%7C(CONTAINS(%3FbookLabel%2C%20%22o%22%20)))%09%0AFILTER(((%3FpublicationDate%20%3E%3D%20%222000-01-01T00%3A00%3A00Z%22%5E%5Exsd%3AdateTime)))%09%0A%09SERVICE%20wikibase%3Alabel%20%7B%0A%09%09bd%3AserviceParam%20wikibase%3Alanguage%20%22de%22%20.%0A%09%7D%0A%7D%0A%23GROUP%20BY%20%3FbookLabel%0ALimit%201000";
       
 $labels =array(
     "authorLabel",
-    "genreLabel",
-    "seriesLabel",
-    "publicationDateLabel",
+    "date",
     );
 
 $fragestellung =[
     0 => "Wer ist Autor des Buches XXXXX?",    
-    1 =>"Zu welchem Genre gehört das Buch XXXXX?",
-    2 =>"Zu welcher Buchreihe gehört das Buch XXXXX ?",
-    3 =>"Wann ist das Buch XXXXX erschienen?",  
+    1 =>"Wann ist das Buch XXXXX erschienen?",  
     ];
       Help::questioncreator($url,$labels,17,$fragestellung);
       Core::addError("Die Fragen wurden angelegt.");
