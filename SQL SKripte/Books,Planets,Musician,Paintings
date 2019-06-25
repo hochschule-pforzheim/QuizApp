@@ -33,7 +33,7 @@ Limit 100
 
 # period = siderische Periode (ZEit für 1 Umlauf auf Bahn
 
-SELECT ?objekt ?objektLabel ?planet ?planetLabel ?mass ?distance ?period  {
+SELECT ?planet ?planetLabel ?mass ?distance ?period  {
 
 ?objekt wdt:P31 wd:Q17444909 ;
 
